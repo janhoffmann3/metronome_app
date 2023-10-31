@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:metronome_app/resources/values/app_colors.dart';
 import 'package:metronome_app/resources/values/app_fonts.dart';
 import 'package:metronome_app/resources/values/app_sizes.dart';
@@ -40,12 +40,13 @@ class MainPage extends ConsumerWidget {
               )
             ]),
         body: Column(children: [
+          const SizedBox(
+            height: 80,
+          ),
           Center(
-            child: Container(
-              margin: const EdgeInsets.only(top: 80),
+            child: SizedBox(
               width: 125,
               height: 13,
-              color: Colors.transparent,
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -76,40 +77,156 @@ class MainPage extends ConsumerWidget {
                   ]),
             ),
           ),
+          const SizedBox(height: 80),
           Center(
-            child: Container(
-              margin: const EdgeInsets.only(top: 80),
-              width: 260,
+            child: SizedBox(
+              width: 300,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Icon(
-                    Icons.add,
-                    color: AppColors.secondary200,
+                  IconButton(
+                    icon: const Icon(Icons.add),
+                    color: AppColors.secondary500,
+                    iconSize: 40,
+                    onPressed: () {},
                   ),
-                  Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Allegro",
-                          style: AppFonts.titleSmall,
-                        ),
-                        Text(
-                          "140",
-                          style: AppFonts.displayLarge,
-                        ),
-                        Text(
-                          "BPM",
-                          style: AppFonts.bodyLarge,
-                        )
-                      ]),
-                  const Icon(
-                    Icons.remove,
-                    color: AppColors.secondary200,
+                  Column(children: [
+                    Text(
+                      "Allegro",
+                      style: AppFonts.titleSmall,
+                    ),
+                    Text(
+                      "140",
+                      style: AppFonts.displayLarge,
+                    ),
+                    Text(
+                      "BPM",
+                      style: AppFonts.bodyLarge,
+                    )
+                  ]),
+                  IconButton(
+                    icon: const Icon(Icons.remove),
+                    color: AppColors.secondary500,
+                    iconSize: 40,
+                    onPressed: () {},
                   ),
                 ],
               ),
             ),
+          ),
+          const SizedBox(height: 106),
+          Center(
+            child: SizedBox(
+              width: 330,
+              child: SliderTheme(
+                  data: const SliderThemeData(
+                      thumbColor: AppColors.primary400,
+                      activeTrackColor: AppColors.primary400,
+                      inactiveTrackColor: AppColors.secondary700),
+                  child: Slider(value: 0.2, onChanged: (value) {})),
+            ),
+          ),
+          const SizedBox(height: 105),
+          Center(
+            child: GestureDetector(
+              child: Container(
+                width: 160,
+                height: 50,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(80),
+                    border: Border.all(color: AppColors.primary400)),
+                child: Center(
+                    child: Text(
+                  "Tap me",
+                  style: AppFonts.bodyLarge,
+                )),
+              ),
+            ),
+          ),
+          Center(
+            child: Stack(children: [
+              Center(
+                child: Container(
+                  width: 90,
+                  height: 90,
+                  margin: const EdgeInsets.only(top: 40),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                        color: AppColors.primary400,
+                        borderRadius: BorderRadius.all(Radius.circular(50))),
+                    child: const Icon(
+                      Icons.play_arrow,
+                      size: 40,
+                    ),
+                  ),
+                ),
+              ),
+              Center(
+                child: Container(
+                  width: 320,
+                  height: 90,
+                  margin: const EdgeInsets.only(top: 48),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              width: 65,
+                              height: 65,
+                              decoration: BoxDecoration(
+                                  color: AppColors.secondary900,
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(50)),
+                                  border: Border.all(
+                                      color: AppColors.secondary500)),
+                              child: const Icon(
+                                Icons.music_note,
+                                color: AppColors.secondary200,
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(top: 5),
+                              child: const Text(
+                                "Sound",
+                                style: TextStyle(color: AppColors.secondary200),
+                              ),
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Container(
+                              width: 65,
+                              height: 65,
+                              decoration: BoxDecoration(
+                                  color: AppColors.secondary900,
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(50)),
+                                  border: Border.all(
+                                      color: AppColors.secondary500)),
+                              child: const Center(
+                                child: Text(
+                                  "4/4",
+                                  textAlign: TextAlign.center,
+                                  style:
+                                      TextStyle(color: AppColors.secondary200),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(top: 5),
+                              child: const Text(
+                                "Signature",
+                                style: TextStyle(color: AppColors.secondary200),
+                              ),
+                            )
+                          ],
+                        )
+                      ]),
+                ),
+              ),
+            ]),
           )
         ]),
       ),

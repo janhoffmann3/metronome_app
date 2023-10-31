@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_riverpod: ^2.4.4
+  flutter_svg: ^2.0.8
   freezed: ^2.4.5
   freezed_annotation: ^2.4.1
   go_router: ^12.0.0
@@ -24,3 +25,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/icons/icon_plus.svg
+    - assets/icons/icon_minus.svg
