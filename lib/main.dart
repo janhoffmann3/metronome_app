@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:metronome_app/screens/Main_screen.dart';
+import 'package:metronome_app/pages/main_page.dart';
 
 void main() {
   runApp(const ProviderScope(child: MainApp()));
@@ -11,6 +11,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: MainScreen());
+    return const MaterialApp(
+      home: MainPage(),
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
