@@ -1,3 +1,4 @@
 {
-  "cmake.configureOnOpen": false
+  "cmake.configureOnOpen": false,
+  "cmake.sourceDirectory": "C:/Users/honza/Development/flutter_dev/metronome_app/linux/flutter"
 }
