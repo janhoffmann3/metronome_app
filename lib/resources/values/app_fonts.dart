@@ -23,4 +23,21 @@ class AppFonts {
     letterSpacing: 0,
     color: AppColors.secondary200,
   );
+
+  static TextStyle labelSmall = GoogleFonts.inter(
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0,
+    color: AppColors.secondary200,
+  );
+
+  static TextStyle sigIcon = GoogleFonts.inter(
+    fontSize: 15,
+    fontWeight: FontWeight.w700,
+    letterSpacing: 5,
+    color: AppColors.secondary200,
+  );
+
+  static TextStyle displaySmall = GoogleFonts.inter(
+      fontSize: 40, fontWeight: FontWeight.bold, color: AppColors.primary400);
 }
