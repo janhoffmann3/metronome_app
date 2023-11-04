@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../resources/values/app_colors.dart';
 import '../../resources/values/app_fonts.dart';
 
-class TapMeWidget extends StatelessWidget {
-  const TapMeWidget({
+class TapMeButton extends StatelessWidget {
+  const TapMeButton({
     super.key,
   });
 

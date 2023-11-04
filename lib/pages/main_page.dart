@@ -7,10 +7,20 @@ import 'package:metronome_app/resources/values/app_sizes.dart';
 import '../widgets/drawer/menu_selection_button.dart';
 import '../widgets/main_page/bottom_menu_widget.dart';
 import '../widgets/main_page/display_widget.dart';
-import '../widgets/main_page/tap_me_widget.dart';
-import '../widgets/main_page/tempo_slider_widget.dart';
+import '../widgets/main_page/tap_me_button.dart';
+import '../widgets/main_page/tempo_slider.dart';
 import '../widgets/main_page/ticker_widget.dart';
 
+/// ### Main page of the app
+///
+///  It contains main componenents:
+///
+/// 1. [TickerWidget] for displaying current beat
+/// 2. [DisplayWidget] for showing selected tempo
+/// 3. [TempoSlider] for setting the tempo (you can also set the tempo using plus/minus buttons in the [DisplayWidget]),
+/// 4. [TapMeButton] for manualy tapping the tempo
+/// 5. [BottomMenuWidget] that works as a bottom navigation bar you can _start_ or _stop_ the metronome, or select different _sounds_ and _signatures_
+///
 class MainPage extends ConsumerWidget {
   const MainPage({super.key});
 
@@ -19,9 +29,13 @@ class MainPage extends ConsumerWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       extendBodyBehindAppBar: true,
+
+      // This is the MainPage AppBar.
       appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
+
+          //The leading - side menu icon that opens the Drawer.
           leading: Builder(builder: (context) {
             return IconButton(
               onPressed: () {
@@ -34,6 +48,8 @@ class MainPage extends ConsumerWidget {
               iconSize: AppSizes.iconSize,
             );
           }),
+
+          //user can add tempo, signature and sound to their favorites list via this button.
           actions: [
             IconButton(
               onPressed: () {},
@@ -42,6 +58,8 @@ class MainPage extends ConsumerWidget {
               iconSize: AppSizes.iconSize,
             )
           ]),
+
+      // App drawer.
       drawer: Drawer(
         child: Container(
             color: AppColors.secondary700,
@@ -66,6 +84,8 @@ class MainPage extends ConsumerWidget {
                       ],
                     )),
                 const SizedBox(height: 20),
+
+                // A column containing the list of links to menus.
                 const Column(
                   children: [
                     MenuSelectionButton(titleText: "Favorites"),
@@ -76,7 +96,10 @@ class MainPage extends ConsumerWidget {
               ],
             )),
       ),
+
+      // This is the body of the main screen.
       body: Container(
+        // This is the background image that fills the main screen and extends behind the app bar.
         decoration: const BoxDecoration(
             /* gradient: RadialGradient(
         center: Alignment.bottomLeft,
@@ -87,27 +110,29 @@ class MainPage extends ConsumerWidget {
             image: DecorationImage(
                 image: AssetImage("assets/images/background.jpg"),
                 fit: BoxFit.cover)),
+
+        // Child collum containing TickerWidget, DisplayWidget, TempoSlider, TapMeButton and BottomMenuWidget.
         child: const Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Spacer(flex: 2),
 
-              // Ticker
+              // A widget that displays the current beat.
               TickerWidget(),
               SizedBox(height: 80),
 
-              // Display
+              // A widget that shows the selected tempo and contains plus/minus controls.
               DisplayWidget(),
               Spacer(flex: 2),
 
-              // Slider
+              // A widget for setting the tempo.
               TempoSlider(),
               Spacer(flex: 2),
 
-              // Tap me button
-              TapMeWidget(),
+              // A button for manually tapping the tempo.
+              TapMeButton(),
 
-              // Bottom menu
+              // A widget with sound selection, signature selection and play/stop button.
               BottomMenuWidget(),
               SizedBox(
                 height: 20,

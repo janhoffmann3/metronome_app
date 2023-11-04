@@ -112,6 +112,17 @@ class BottomMenuWidget extends StatelessWidget {
                                         borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(20),
                                             topRight: Radius.circular(20))),
+                                    child: const Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(height: 25),
+                                        Text("Select signature"),
+                                        SizedBox(
+                                          height: 45,
+                                        )
+                                      ],
+                                    ),
                                   );
                                 }));
                           },
