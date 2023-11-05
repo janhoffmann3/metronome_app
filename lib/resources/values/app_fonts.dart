@@ -3,6 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:metronome_app/resources/values/app_colors.dart';
 
 class AppFonts {
+  static TextStyle titleNormal = GoogleFonts.inter(
+      fontSize: 24,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0,
+      color: AppColors.secondary200);
+
   static TextStyle titleSmall = GoogleFonts.inter(
     fontSize: 22,
     fontWeight: FontWeight.w600,
@@ -40,4 +46,9 @@ class AppFonts {
 
   static TextStyle displaySmall = GoogleFonts.inter(
       fontSize: 40, fontWeight: FontWeight.bold, color: AppColors.primary400);
+
+  static TextStyle signatureNumber = GoogleFonts.inter(
+      fontSize: 55,
+      fontWeight: FontWeight.normal,
+      color: AppColors.secondary200);
 }

@@ -62,7 +62,10 @@ class MainPage extends ConsumerWidget {
       // App drawer.
       drawer: Drawer(
         child: Container(
-            color: AppColors.secondary700,
+            decoration: const BoxDecoration(
+                color: AppColors.secondary700,
+                border:
+                    Border(right: BorderSide(color: AppColors.secondary500))),
             child: ListView(
               children: [
                 const SizedBox(
