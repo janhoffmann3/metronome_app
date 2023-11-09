@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../resources/values/app_colors.dart';
 
-class PlayButton extends StatelessWidget {
-  const PlayButton({
+/// ### Play button widget from the bottom menu
+///
+/// Used for playing/pausing the metronome
+///
+class BottomMenuPlayButton extends StatelessWidget {
+  const BottomMenuPlayButton({
     super.key,
   });
 

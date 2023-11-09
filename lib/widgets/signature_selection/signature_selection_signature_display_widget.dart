@@ -3,9 +3,19 @@ import 'package:flutter/material.dart';
 import '../../resources/values/app_colors.dart';
 import '../../resources/values/app_fonts.dart';
 
+/// ### Signature display widget
+///
+/// Shows the user which numeral is being set and what is its value.
+/// [numeral] for what numeral this widget is - there are two numerals in signature - first and second.
+/// [signatureText] for displaying the actual value of the numeral.
+///
+
 class SignatureDisplayWidget extends StatelessWidget {
+  /// What numeral this widget displays - first or second.
   final Enum numeral;
-  final String signatureText;
+
+  /// An actual value of the numeral.
+  final int signatureText;
 
   const SignatureDisplayWidget({
     super.key,
@@ -23,7 +33,7 @@ class SignatureDisplayWidget extends StatelessWidget {
           color: AppColors.primary400),
       child: Center(
           child: Text(
-        signatureText,
+        signatureText.toString(),
         style: AppFonts.signatureNumber,
       )),
     );

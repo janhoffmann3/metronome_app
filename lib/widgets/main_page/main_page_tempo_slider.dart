@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../../resources/values/app_colors.dart';
 
-class TempoSlider extends StatelessWidget {
-  const TempoSlider({
+/// ### Tempo slider
+///
+/// Just a basic slider for setting the tempo.
+///
+
+class MainPageTempoSlider extends StatelessWidget {
+  const MainPageTempoSlider({
     super.key,
   });
 

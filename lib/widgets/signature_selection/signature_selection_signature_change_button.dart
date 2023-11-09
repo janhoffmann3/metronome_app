@@ -2,11 +2,21 @@ import 'package:flutter/material.dart';
 
 import '../../resources/values/app_colors.dart';
 
-class SignatureChangeButton extends StatelessWidget {
+/// ### Signature change button
+///
+/// A button for changing the signature
+/// [type] for declaring which type of a button this is (increasing or decreasing).
+/// [mainIcon] an icon that will be displayed in this button (+ or -) in this case.
+///
+
+class SignatureSelectionSignatureChangeButton extends StatelessWidget {
+  /// Button type
   final Enum type;
+
+  /// Button icon
   final Icon mainIcon;
 
-  const SignatureChangeButton(
+  const SignatureSelectionSignatureChangeButton(
       {super.key, required this.mainIcon, required this.type});
 
   @override

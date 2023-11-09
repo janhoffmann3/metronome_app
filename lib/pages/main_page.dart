@@ -4,22 +4,22 @@ import 'package:metronome_app/resources/values/app_colors.dart';
 import 'package:metronome_app/resources/values/app_fonts.dart';
 import 'package:metronome_app/resources/values/app_sizes.dart';
 
-import '../widgets/drawer/menu_selection_button.dart';
-import '../widgets/main_page/bottom_menu_widget.dart';
-import '../widgets/main_page/display_widget.dart';
-import '../widgets/main_page/tap_me_button.dart';
-import '../widgets/main_page/tempo_slider.dart';
-import '../widgets/main_page/ticker_widget.dart';
+import '../widgets/drawer/drawer_menu_selection_button.dart';
+import '../widgets/main_page/main_page_bottom_menu_widget.dart';
+import '../widgets/main_page/main_page_display_widget.dart';
+import '../widgets/main_page/main_page_tap_me_button.dart';
+import '../widgets/main_page/main_page_tempo_slider.dart';
+import '../widgets/main_page/main_page_ticker_widget.dart';
 
 /// ### Main page of the app
 ///
 ///  It contains main componenents:
 ///
-/// 1. [TickerWidget] for displaying current beat
-/// 2. [DisplayWidget] for showing selected tempo
-/// 3. [TempoSlider] for setting the tempo (you can also set the tempo using plus/minus buttons in the [DisplayWidget]),
-/// 4. [TapMeButton] for manualy tapping the tempo
-/// 5. [BottomMenuWidget] that works as a bottom navigation bar you can _start_ or _stop_ the metronome, or select different _sounds_ and _signatures_
+/// 1. [MainPageTickerWidget] for displaying current beat
+/// 2. [MainPageDisplayWidget] for showing selected tempo
+/// 3. [MainPageTempoSlider] for setting the tempo (you can also set the tempo using plus/minus buttons in the [MainPageDisplayWidget]),
+/// 4. [MainPageTapMeButton] for manualy tapping the tempo
+/// 5. [MainPageBottomMenuWidget] that works as a bottom navigation bar you can _start_ or _stop_ the metronome, or select different _sounds_ and _signatures_
 ///
 class MainPage extends ConsumerWidget {
   const MainPage({super.key});
@@ -49,7 +49,7 @@ class MainPage extends ConsumerWidget {
             );
           }),
 
-          //user can add tempo, signature and sound to their favorites list via this button.
+          // User can add tempo, signature and sound to their favorites list via this button.
           actions: [
             IconButton(
               onPressed: () {},
@@ -91,9 +91,9 @@ class MainPage extends ConsumerWidget {
                 // A column containing the list of links to menus.
                 const Column(
                   children: [
-                    MenuSelectionButton(titleText: "Favorites"),
-                    MenuSelectionButton(titleText: "Settings"),
-                    MenuSelectionButton(titleText: "About")
+                    DrawerMenuSelectionButton(titleText: "Favorites"),
+                    DrawerMenuSelectionButton(titleText: "Settings"),
+                    DrawerMenuSelectionButton(titleText: "About")
                   ],
                 )
               ],
@@ -121,22 +121,22 @@ class MainPage extends ConsumerWidget {
               Spacer(flex: 2),
 
               // A widget that displays the current beat.
-              TickerWidget(),
+              MainPageTickerWidget(),
               SizedBox(height: 80),
 
               // A widget that shows the selected tempo and contains plus/minus controls.
-              DisplayWidget(),
+              MainPageDisplayWidget(),
               Spacer(flex: 2),
 
               // A widget for setting the tempo.
-              TempoSlider(),
+              MainPageTempoSlider(),
               Spacer(flex: 2),
 
               // A button for manually tapping the tempo.
-              TapMeButton(),
+              MainPageTapMeButton(),
 
               // A widget with sound selection, signature selection and play/stop button.
-              BottomMenuWidget(),
+              MainPageBottomMenuWidget(),
               SizedBox(
                 height: 20,
               )

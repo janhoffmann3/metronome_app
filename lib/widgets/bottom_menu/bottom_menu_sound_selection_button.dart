@@ -3,9 +3,14 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../resources/values/app_colors.dart';
 import '../../resources/values/app_fonts.dart';
+import 'bottom_menu_modal_sheet_wrapper.dart';
 
-class SoundSelectionButton extends StatelessWidget {
-  const SoundSelectionButton({
+/// ### Sound selection button from the bottom menu
+///
+/// Used for selecting sound of a tick.
+///
+class BottomMenuSoundSelectionButton extends StatelessWidget {
+  const BottomMenuSoundSelectionButton({
     super.key,
   });
 
@@ -26,13 +31,9 @@ class SoundSelectionButton extends StatelessWidget {
                     isScrollControlled: true,
                     context: context,
                     builder: ((context) {
-                      return Container(
-                        height: MediaQuery.of(context).size.height * 0.7,
-                        decoration: const BoxDecoration(
-                            color: AppColors.secondary700,
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20),
-                                topRight: Radius.circular(20))),
+                      return const BottomMenuModalSheetWrapper(
+                        sizeMultiplier: 0.75,
+                        titleText: "Select sound",
                       );
                     }));
               },

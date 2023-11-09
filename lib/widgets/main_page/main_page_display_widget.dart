@@ -4,8 +4,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../resources/values/app_colors.dart';
 import '../../resources/values/app_fonts.dart';
 
-class DisplayWidget extends StatelessWidget {
-  const DisplayWidget({
+/// ### Display widget
+///
+/// It displays current tempo to user and contains information about latin tempo, bpm label and plus/minus buttons.
+/// With plus/minus buttons user can adjust the tempo by 1/-1.
+///
+
+class MainPageDisplayWidget extends StatelessWidget {
+  const MainPageDisplayWidget({
     super.key,
   });
 
@@ -17,6 +23,7 @@ class DisplayWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            // Plus button to increase the tempo by 1.
             IconButton(
               icon: SvgPicture.asset(
                 "assets/icons/icon_plus.svg",
@@ -29,6 +36,8 @@ class DisplayWidget extends StatelessWidget {
               iconSize: 40,
               onPressed: () {},
             ),
+
+            // This collumn contains main information - latin text, tempo and bpm label
             Column(children: [
               Text(
                 "Allegro",
@@ -43,6 +52,8 @@ class DisplayWidget extends StatelessWidget {
                 style: AppFonts.bodyLarge,
               )
             ]),
+
+            // Minus button to decrease the tempo by 1.
             IconButton(
               icon: SvgPicture.asset(
                 "assets/icons/icon_minus.svg",

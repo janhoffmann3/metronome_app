@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 import '../../resources/values/app_colors.dart';
 import '../../resources/values/app_fonts.dart';
 
-class TapMeButton extends StatelessWidget {
-  const TapMeButton({
+/// ### Tap me button
+///
+/// User can manually tap the tempo using this button.
+///
+
+class MainPageTapMeButton extends StatelessWidget {
+  const MainPageTapMeButton({
     super.key,
   });
 
