@@ -66,35 +66,50 @@ class MainPage extends ConsumerWidget {
                 color: AppColors.secondary700,
                 border:
                     Border(right: BorderSide(color: AppColors.secondary500))),
-            child: ListView(
+            child: Column(
               children: [
                 const SizedBox(
                   height: 80,
                 ),
-                DrawerHeader(
-                    margin: const EdgeInsets.only(left: 25),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Welcome back",
-                          style: AppFonts.titleSmall,
-                        ),
-                        Text(
-                          "John!",
-                          style: AppFonts.displaySmall,
-                        )
-                      ],
-                    )),
-                const SizedBox(height: 20),
-
+                Column(
+                  children: [
+                    SizedBox(
+                        height: 80,
+                        width: 250,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Welcome back",
+                              style: AppFonts.titleSmall,
+                            ),
+                            Text(
+                              "John!",
+                              style: AppFonts.displaySmall,
+                            )
+                          ],
+                        )),
+                  ],
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
                 // A column containing the list of links to menus.
                 const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     DrawerMenuSelectionButton(titleText: "Favorites"),
                     DrawerMenuSelectionButton(titleText: "Settings"),
                     DrawerMenuSelectionButton(titleText: "About")
                   ],
+                ),
+                const Spacer(flex: 6),
+                Text(
+                  "App version 1.0.0",
+                  style: AppFonts.versionNumber,
+                ),
+                const SizedBox(
+                  height: 40,
                 )
               ],
             )),
@@ -111,7 +126,7 @@ class MainPage extends ConsumerWidget {
         radius: 1,
       ) */
             image: DecorationImage(
-                image: AssetImage("assets/images/background.jpg"),
+                image: AssetImage("assets/images/main_page_background.jpg"),
                 fit: BoxFit.cover)),
 
         // Child collum containing TickerWidget, DisplayWidget, TempoSlider, TapMeButton and BottomMenuWidget.

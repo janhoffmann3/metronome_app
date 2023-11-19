@@ -20,6 +20,7 @@ class AppFonts {
     fontSize: 80,
     fontWeight: FontWeight.w900,
     letterSpacing: 0,
+    fontStyle: FontStyle.italic,
     color: AppColors.secondary200,
   );
 
@@ -28,6 +29,27 @@ class AppFonts {
     fontWeight: FontWeight.w500,
     letterSpacing: 0,
     color: AppColors.secondary200,
+  );
+
+  static TextStyle bodyLargeWhite = GoogleFonts.inter(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0,
+    color: AppColors.white,
+  );
+
+  static TextStyle bodyLargeGrey = GoogleFonts.inter(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0,
+    color: AppColors.secondary500,
+  );
+
+  static TextStyle bodyLargeDark = GoogleFonts.inter(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0,
+    color: AppColors.secondary900,
   );
 
   static TextStyle labelSmall = GoogleFonts.inter(
@@ -51,4 +73,7 @@ class AppFonts {
       fontSize: 55,
       fontWeight: FontWeight.normal,
       color: AppColors.secondary200);
+
+  static TextStyle versionNumber = GoogleFonts.inter(
+      fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.secondary500);
 }

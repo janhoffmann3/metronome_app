@@ -32,7 +32,7 @@ class BottomMenuSignatureSelectionButton extends StatelessWidget {
                   context: context,
                   builder: ((context) {
                     return const BottomMenuModalSheetWrapper(
-                        sizeMultiplier: 0.45,
+                        height: 430,
                         titleText: "Select signature",
                         child: SignatureSelectionWidget());
                   }));

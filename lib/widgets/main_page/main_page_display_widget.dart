@@ -43,9 +43,12 @@ class MainPageDisplayWidget extends StatelessWidget {
                 "Allegro",
                 style: AppFonts.titleSmall,
               ),
-              Text(
-                "140",
-                style: AppFonts.displayLarge,
+              Container(
+                margin: const EdgeInsets.only(right: 15),
+                child: Text(
+                  "140",
+                  style: AppFonts.displayLarge,
+                ),
               ),
               Text(
                 "BPM",
