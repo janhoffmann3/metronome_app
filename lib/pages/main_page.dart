@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:metronome_app/models/signature.dart';
 import 'package:metronome_app/resources/values/app_colors.dart';
 import 'package:metronome_app/resources/values/app_fonts.dart';
 import 'package:metronome_app/resources/values/app_sizes.dart';
@@ -21,6 +22,28 @@ import '../widgets/main_page/main_page_ticker_widget.dart';
 /// 4. [MainPageTapMeButton] for manualy tapping the tempo
 /// 5. [MainPageBottomMenuWidget] that works as a bottom navigation bar you can _start_ or _stop_ the metronome, or select different _sounds_ and _signatures_
 ///
+
+final tempoProvider = StateProvider<int>((ref) {
+  return 100;
+});
+
+class SignatureProvider extends StateNotifier<Signature> {
+  SignatureProvider() : super(Signature(1, 2));
+
+  void incrementFirstNumeral() {
+    state = Signature(state.firstNumeral + 1, state.secondNumeral);
+  }
+
+  void incrementSecondNumeral() {
+    state = Signature(state.firstNumeral, state.secondNumeral + 1);
+  }
+}
+
+final signatureProvider =
+    StateNotifierProvider<SignatureProvider, Signature>((ref) {
+  return SignatureProvider();
+});
+
 class MainPage extends ConsumerWidget {
   const MainPage({super.key});
 

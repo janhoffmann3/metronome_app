@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:metronome_app/pages/main_page.dart';
 import 'package:metronome_app/resources/values/app_enums.dart';
 
 import '../../resources/values/app_fonts.dart';
@@ -12,41 +14,46 @@ import 'signature_selection_signature_display_widget.dart';
 /// It contains two [SignatureDisplayWidget] for showing the signature numeral on screen.
 ///
 
-class SignatureSelectionWidget extends StatelessWidget {
+class SignatureSelectionWidget extends ConsumerWidget {
   const SignatureSelectionWidget({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final signature = ref.watch(signatureProvider);
+
+    final int? firstNumeral = signature.firstNumeral;
+    final int? secondNumeral = signature.secondNumeral;
+
     return SizedBox(
       width: 248,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // Column for the first numeral.
-          const Column(
+          Column(
             children: [
               // Button used for increasing the signature numeral.
-              SignatureSelectionSignatureChangeButton(
+              const SignatureSelectionSignatureChangeButton(
                 mainIcon: Icon(Icons.add),
                 type: SignatureButtonType.inc,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
 
               // First numeral display widget.
               SignatureDisplayWidget(
-                signatureText: 4,
+                signatureText: firstNumeral,
                 numeral: SignatureDisplayNumeral.first,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
 
               // Button used for decreasing the signature numeral.
-              SignatureSelectionSignatureChangeButton(
+              const SignatureSelectionSignatureChangeButton(
                   mainIcon: Icon(Icons.remove), type: SignatureButtonType.dec),
             ],
           ),
@@ -58,21 +65,22 @@ class SignatureSelectionWidget extends StatelessWidget {
           ),
 
           // Column for the second numeral.
-          const Column(
+          Column(
             children: [
               //Button used for increasing the signature numeral.
-              SignatureSelectionSignatureChangeButton(
+              const SignatureSelectionSignatureChangeButton(
                 mainIcon: Icon(Icons.add),
                 type: SignatureButtonType.inc,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
 
               // Second numeral display widget.
               SignatureDisplayWidget(
-                  numeral: SignatureDisplayNumeral.second, signatureText: 4),
-              SizedBox(
+                  numeral: SignatureDisplayNumeral.second,
+                  signatureText: secondNumeral),
+              const SizedBox(
                 height: 10,
               ),
 

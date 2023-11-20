@@ -15,7 +15,7 @@ class SignatureDisplayWidget extends StatelessWidget {
   final Enum numeral;
 
   /// An actual value of the numeral.
-  final int signatureText;
+  final int? signatureText;
 
   const SignatureDisplayWidget({
     super.key,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:metronome_app/pages/main_page.dart';
 
 import '../../resources/values/app_colors.dart';
 
@@ -7,13 +9,15 @@ import '../../resources/values/app_colors.dart';
 /// Just a basic slider for setting the tempo.
 ///
 
-class MainPageTempoSlider extends StatelessWidget {
+class MainPageTempoSlider extends ConsumerWidget {
   const MainPageTempoSlider({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final tempo = ref.watch(tempoProvider);
+
     return Center(
       child: SizedBox(
         width: 330,
@@ -22,7 +26,15 @@ class MainPageTempoSlider extends StatelessWidget {
                 thumbColor: AppColors.primary400,
                 activeTrackColor: AppColors.primary400,
                 inactiveTrackColor: AppColors.secondary700),
-            child: Slider(value: 0.2, onChanged: (value) {})),
+            child: Slider(
+                min: 30,
+                max: 250,
+                value: tempo.toDouble(),
+                onChanged: (value) {
+                  int newValue = value.round();
+
+                  ref.read(tempoProvider.notifier).state = newValue;
+                })),
       ),
     );
   }
