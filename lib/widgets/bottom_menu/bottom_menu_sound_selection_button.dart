@@ -33,7 +33,7 @@ class BottomMenuSoundSelectionButton extends StatelessWidget {
                     builder: ((context) {
                       return const BottomMenuModalSheetWrapper(
                         height: 650,
-                        titleText: "Select signature",
+                        titleText: "Select sound",
                       );
                     }));
               },

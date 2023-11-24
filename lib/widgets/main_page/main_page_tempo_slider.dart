@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:metronome_app/pages/main_page.dart';
 
+import '../../models/metronome.dart';
 import '../../resources/values/app_colors.dart';
 
 /// ### Tempo slider
@@ -16,7 +17,8 @@ class MainPageTempoSlider extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tempo = ref.watch(tempoProvider);
+    final Metronome metronome = ref.watch(metronomeControllerProvider);
+    int tempo = metronome.tempo;
 
     return Center(
       child: SizedBox(
@@ -33,7 +35,9 @@ class MainPageTempoSlider extends ConsumerWidget {
                 onChanged: (value) {
                   int newValue = value.round();
 
-                  ref.read(tempoProvider.notifier).state = newValue;
+                  ref
+                      .read(metronomeControllerProvider.notifier)
+                      .changeTempo(newValue);
                 })),
       ),
     );

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:metronome_app/pages/main_page.dart';
-import 'package:metronome_app/resources/values/app_enums.dart';
 
+import '../../models/metronome.dart';
+import '../../resources/values/app_colors.dart';
 import '../../resources/values/app_fonts.dart';
-import 'signature_selection_signature_change_button.dart';
 import 'signature_selection_signature_display_widget.dart';
 
 /// ### Signature selection widget
@@ -21,10 +21,10 @@ class SignatureSelectionWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final signature = ref.watch(signatureProvider);
+    final Metronome metronome = ref.watch(metronomeControllerProvider);
 
-    final int? firstNumeral = signature.firstNumeral;
-    final int? secondNumeral = signature.secondNumeral;
+    final int firstNumeral = metronome.signature.firstNumeral;
+    final int secondNumeral = metronome.signature.secondNumeral;
 
     return SizedBox(
       width: 248,
@@ -35,9 +35,23 @@ class SignatureSelectionWidget extends ConsumerWidget {
           Column(
             children: [
               // Button used for increasing the signature numeral.
-              const SignatureSelectionSignatureChangeButton(
-                mainIcon: Icon(Icons.add),
-                type: SignatureButtonType.inc,
+              Container(
+                width: 96,
+                height: 43,
+                decoration: BoxDecoration(
+                    color: AppColors.secondary900,
+                    border: Border.all(color: AppColors.secondary500),
+                    borderRadius: const BorderRadius.all(Radius.circular(10))),
+                child: ElevatedButton(
+                  onPressed: () {
+                    ref
+                        .read(metronomeControllerProvider.notifier)
+                        .increaseFirstNumeral();
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent),
+                  child: const Icon(Icons.add),
+                ),
               ),
               const SizedBox(
                 height: 10,
@@ -46,15 +60,30 @@ class SignatureSelectionWidget extends ConsumerWidget {
               // First numeral display widget.
               SignatureDisplayWidget(
                 signatureText: firstNumeral,
-                numeral: SignatureDisplayNumeral.first,
               ),
               const SizedBox(
                 height: 10,
               ),
 
               // Button used for decreasing the signature numeral.
-              const SignatureSelectionSignatureChangeButton(
-                  mainIcon: Icon(Icons.remove), type: SignatureButtonType.dec),
+              Container(
+                width: 96,
+                height: 43,
+                decoration: BoxDecoration(
+                    color: AppColors.secondary900,
+                    border: Border.all(color: AppColors.secondary500),
+                    borderRadius: const BorderRadius.all(Radius.circular(10))),
+                child: ElevatedButton(
+                  onPressed: () {
+                    ref
+                        .read(metronomeControllerProvider.notifier)
+                        .decreaseFirstNumeral();
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent),
+                  child: const Icon(Icons.remove),
+                ),
+              ),
             ],
           ),
 
@@ -68,25 +97,53 @@ class SignatureSelectionWidget extends ConsumerWidget {
           Column(
             children: [
               //Button used for increasing the signature numeral.
-              const SignatureSelectionSignatureChangeButton(
-                mainIcon: Icon(Icons.add),
-                type: SignatureButtonType.inc,
+              Container(
+                width: 96,
+                height: 43,
+                decoration: BoxDecoration(
+                    color: AppColors.secondary900,
+                    border: Border.all(color: AppColors.secondary500),
+                    borderRadius: const BorderRadius.all(Radius.circular(10))),
+                child: ElevatedButton(
+                  onPressed: () {
+                    ref
+                        .read(metronomeControllerProvider.notifier)
+                        .increaseSecondNumeral();
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent),
+                  child: const Icon(Icons.add),
+                ),
               ),
               const SizedBox(
                 height: 10,
               ),
 
               // Second numeral display widget.
-              SignatureDisplayWidget(
-                  numeral: SignatureDisplayNumeral.second,
-                  signatureText: secondNumeral),
+              SignatureDisplayWidget(signatureText: secondNumeral),
               const SizedBox(
                 height: 10,
               ),
 
               // Button used for decreasing the signature numeral.
-              SignatureSelectionSignatureChangeButton(
-                  mainIcon: Icon(Icons.remove), type: SignatureButtonType.dec),
+              Container(
+                width: 96,
+                height: 43,
+                decoration: BoxDecoration(
+                    color: AppColors.secondary900,
+                    border: Border.all(color: AppColors.secondary500),
+                    borderRadius: const BorderRadius.all(Radius.circular(10))),
+                child: ElevatedButton(
+                  onPressed: () {
+                    ref
+                        .read(metronomeControllerProvider.notifier)
+                        .decreaseSecondNumeral();
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent),
+                  child: const Icon(Icons.remove),
+                ),
+              ),
             ],
           ),
         ],

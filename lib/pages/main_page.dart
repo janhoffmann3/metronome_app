@@ -5,6 +5,7 @@ import 'package:metronome_app/resources/values/app_colors.dart';
 import 'package:metronome_app/resources/values/app_fonts.dart';
 import 'package:metronome_app/resources/values/app_sizes.dart';
 
+import '../models/metronome.dart';
 import '../widgets/drawer/drawer_menu_selection_button.dart';
 import '../widgets/main_page/main_page_bottom_menu_widget.dart';
 import '../widgets/main_page/main_page_display_widget.dart';
@@ -23,25 +24,72 @@ import '../widgets/main_page/main_page_ticker_widget.dart';
 /// 5. [MainPageBottomMenuWidget] that works as a bottom navigation bar you can _start_ or _stop_ the metronome, or select different _sounds_ and _signatures_
 ///
 
-final tempoProvider = StateProvider<int>((ref) {
-  return 100;
-});
+class MetronomeController extends StateNotifier<Metronome> {
+  MetronomeController() : super(Metronome(100, Signature(1, 2)));
 
-class SignatureProvider extends StateNotifier<Signature> {
-  SignatureProvider() : super(Signature(1, 2));
-
-  void incrementFirstNumeral() {
-    state = Signature(state.firstNumeral + 1, state.secondNumeral);
+  void changeTempo(value) {
+    state = Metronome(state.tempo = value,
+        Signature(state.signature.firstNumeral, state.signature.secondNumeral));
   }
 
-  void incrementSecondNumeral() {
-    state = Signature(state.firstNumeral, state.secondNumeral + 1);
+  void increaseTempo() {
+    if (state.tempo < 250) {
+      state = Metronome(
+          state.tempo + 1,
+          Signature(
+              state.signature.firstNumeral, state.signature.secondNumeral));
+    }
+  }
+
+  void decreaseTempo() {
+    if (state.tempo > 31) {
+      state = Metronome(
+          state.tempo - 1,
+          Signature(
+              state.signature.firstNumeral, state.signature.secondNumeral));
+    }
+  }
+
+  void increaseFirstNumeral() {
+    if (state.signature.firstNumeral < 4) {
+      state = Metronome(
+          state.tempo,
+          Signature(
+              state.signature.firstNumeral + 1, state.signature.secondNumeral));
+    }
+  }
+
+  void decreaseFirstNumeral() {
+    if (state.signature.firstNumeral > 1) {
+      state = Metronome(
+          state.tempo,
+          Signature(
+              state.signature.firstNumeral - 1, state.signature.secondNumeral));
+    }
+  }
+
+  void increaseSecondNumeral() {
+    if (state.signature.secondNumeral < 4) {
+      state = Metronome(
+          state.tempo,
+          Signature(
+              state.signature.firstNumeral, state.signature.secondNumeral + 1));
+    }
+  }
+
+  void decreaseSecondNumeral() {
+    if (state.signature.secondNumeral > 1) {
+      state = Metronome(
+          state.tempo,
+          Signature(
+              state.signature.firstNumeral, state.signature.secondNumeral - 1));
+    }
   }
 }
 
-final signatureProvider =
-    StateNotifierProvider<SignatureProvider, Signature>((ref) {
-  return SignatureProvider();
+final metronomeControllerProvider =
+    StateNotifierProvider<MetronomeController, Metronome>((ref) {
+  return MetronomeController();
 });
 
 class MainPage extends ConsumerWidget {

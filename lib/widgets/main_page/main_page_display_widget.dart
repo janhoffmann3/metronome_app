@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:metronome_app/pages/main_page.dart';
 
+import '../../models/metronome.dart';
 import '../../resources/values/app_colors.dart';
 import '../../resources/values/app_fonts.dart';
 
@@ -17,7 +18,8 @@ class MainPageDisplayWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final int tempo = ref.watch(tempoProvider);
+    final Metronome metronome = ref.watch(metronomeControllerProvider);
+    int tempo = metronome.tempo;
 
     String getItalianTranscription(int tempo) {
       switch (tempo) {
@@ -62,7 +64,7 @@ class MainPageDisplayWidget extends ConsumerWidget {
               color: AppColors.secondary500,
               iconSize: 40,
               onPressed: () {
-                ref.read(tempoProvider.notifier).state--;
+                ref.read(metronomeControllerProvider.notifier).decreaseTempo();
               },
             ),
 
@@ -97,7 +99,7 @@ class MainPageDisplayWidget extends ConsumerWidget {
               color: AppColors.secondary500,
               iconSize: 40,
               onPressed: () {
-                ref.read(tempoProvider.notifier).state++;
+                ref.read(metronomeControllerProvider.notifier).increaseTempo();
               },
             ),
           ],

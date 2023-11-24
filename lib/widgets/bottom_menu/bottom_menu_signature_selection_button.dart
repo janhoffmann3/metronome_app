@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:metronome_app/models/signature.dart';
 import 'package:metronome_app/pages/main_page.dart';
 import 'package:metronome_app/widgets/signature_selection/signature_selection_widget.dart';
 
+import '../../models/metronome.dart';
 import '../../resources/values/app_colors.dart';
 import '../../resources/values/app_fonts.dart';
 import 'bottom_menu_modal_sheet_wrapper.dart';
@@ -19,10 +19,10 @@ class BottomMenuSignatureSelectionButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final Signature signature = ref.watch(signatureProvider);
+    final Metronome metronome = ref.watch(metronomeControllerProvider);
 
-    final String firstNumeral = signature.firstNumeral.toString();
-    final String secondNumeral = signature.secondNumeral.toString();
+    final String firstNumeral = metronome.signature.firstNumeral.toString();
+    final String secondNumeral = metronome.signature.secondNumeral.toString();
 
     return Column(
       children: [
@@ -48,7 +48,7 @@ class BottomMenuSignatureSelectionButton extends ConsumerWidget {
             elevation: 0,
             backgroundColor: AppColors.secondary900,
             child: Text(
-              firstNumeral + "/" + secondNumeral,
+              "$firstNumeral/$secondNumeral",
               style: AppFonts.sigIcon,
             ),
           ),

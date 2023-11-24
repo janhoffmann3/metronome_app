@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../resources/values/app_colors.dart';
 
@@ -6,13 +7,13 @@ import '../../resources/values/app_colors.dart';
 ///
 /// Used for playing/pausing the metronome
 ///
-class BottomMenuPlayButton extends StatelessWidget {
+class BottomMenuPlayButton extends ConsumerWidget {
   const BottomMenuPlayButton({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
         width: 90,
         height: 90,

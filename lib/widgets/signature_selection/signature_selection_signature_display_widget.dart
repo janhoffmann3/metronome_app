@@ -11,15 +11,11 @@ import '../../resources/values/app_fonts.dart';
 ///
 
 class SignatureDisplayWidget extends StatelessWidget {
-  /// What numeral this widget displays - first or second.
-  final Enum numeral;
-
   /// An actual value of the numeral.
   final int? signatureText;
 
   const SignatureDisplayWidget({
     super.key,
-    required this.numeral,
     required this.signatureText,
   });
 
