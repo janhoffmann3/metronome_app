@@ -32,6 +32,9 @@ class MainPageTempoSlider extends ConsumerWidget {
                 min: 30,
                 max: 250,
                 value: tempo.toDouble(),
+                onChangeEnd: (value) {
+                  ref.read(metronomeControllerProvider.notifier).resync();
+                },
                 onChanged: (value) {
                   int newValue = value.round();
 

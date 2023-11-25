@@ -52,7 +52,7 @@ class MainPageDisplayWidget extends ConsumerWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // Plus button to increase the tempo by 1.
+            // Minus button to decrease the tempo by 1.
             IconButton(
               icon: SvgPicture.asset(
                 "assets/icons/icon_minus.svg",
@@ -65,6 +65,7 @@ class MainPageDisplayWidget extends ConsumerWidget {
               iconSize: 40,
               onPressed: () {
                 ref.read(metronomeControllerProvider.notifier).decreaseTempo();
+                ref.read(metronomeControllerProvider.notifier).resync();
               },
             ),
 
@@ -87,7 +88,7 @@ class MainPageDisplayWidget extends ConsumerWidget {
               )
             ]),
 
-            // Minus button to decrease the tempo by 1.
+            // Plus button to increase the tempo by 1.
             IconButton(
               icon: SvgPicture.asset(
                 "assets/icons/icon_plus.svg",
@@ -100,6 +101,7 @@ class MainPageDisplayWidget extends ConsumerWidget {
               iconSize: 40,
               onPressed: () {
                 ref.read(metronomeControllerProvider.notifier).increaseTempo();
+                ref.read(metronomeControllerProvider.notifier).resync();
               },
             ),
           ],

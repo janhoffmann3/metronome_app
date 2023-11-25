@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:metronome_app/pages/main_page.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../models/metronome.dart';
 import '../../resources/values/app_colors.dart';
 import '../../resources/values/app_fonts.dart';
 import 'signature_selection_signature_display_widget.dart';
+
+part 'signature_selection_widget.g.dart';
 
 /// ### Signature selection widget
 ///
@@ -13,6 +16,12 @@ import 'signature_selection_signature_display_widget.dart';
 /// It contains four [SignatureSelectionSignatureChangeButton] (two for decreasing and two for increasing) for changing the signature.
 /// It contains two [SignatureDisplayWidget] for showing the signature numeral on screen.
 ///
+
+@riverpod
+class TempoNotifier extends _$TempoNotifier {
+  @override
+  int build() => 100;
+}
 
 class SignatureSelectionWidget extends ConsumerWidget {
   const SignatureSelectionWidget({

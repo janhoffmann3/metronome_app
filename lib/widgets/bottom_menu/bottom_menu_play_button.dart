@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:metronome_app/pages/main_page.dart';
 
 import '../../resources/values/app_colors.dart';
 
@@ -14,18 +15,18 @@ class BottomMenuPlayButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    bool isActive = ref.watch(metronomeControllerProvider).isActive;
+    IconData iconData = isActive ? Icons.stop : Icons.play_arrow;
+
     return Container(
         width: 90,
         height: 90,
         margin: const EdgeInsets.only(top: 40),
         child: FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: AppColors.primary400,
-          child: const Icon(
-            Icons.play_arrow_rounded,
-            size: 50,
-            color: AppColors.secondary900,
-          ),
-        ));
+            onPressed: () {
+              ref.watch(metronomeControllerProvider.notifier).toggle();
+            },
+            backgroundColor: AppColors.primary400,
+            child: Icon(iconData, size: 50, color: AppColors.secondary900)));
   }
 }

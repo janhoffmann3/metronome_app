@@ -12,7 +12,7 @@ import '../../resources/values/app_fonts.dart';
 
 class SignatureDisplayWidget extends StatelessWidget {
   /// An actual value of the numeral.
-  final int? signatureText;
+  final int signatureText;
 
   const SignatureDisplayWidget({
     super.key,

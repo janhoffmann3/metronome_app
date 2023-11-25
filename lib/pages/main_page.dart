@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:metronome_app/models/signature.dart';
 import 'package:metronome_app/resources/values/app_colors.dart';
 import 'package:metronome_app/resources/values/app_fonts.dart';
 import 'package:metronome_app/resources/values/app_sizes.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../models/metronome.dart';
 import '../widgets/drawer/drawer_menu_selection_button.dart';
@@ -12,6 +15,8 @@ import '../widgets/main_page/main_page_display_widget.dart';
 import '../widgets/main_page/main_page_tap_me_button.dart';
 import '../widgets/main_page/main_page_tempo_slider.dart';
 import '../widgets/main_page/main_page_ticker_widget.dart';
+
+part 'main_page.g.dart';
 
 /// ### Main page of the app
 ///
@@ -23,74 +28,129 @@ import '../widgets/main_page/main_page_ticker_widget.dart';
 /// 4. [MainPageTapMeButton] for manualy tapping the tempo
 /// 5. [MainPageBottomMenuWidget] that works as a bottom navigation bar you can _start_ or _stop_ the metronome, or select different _sounds_ and _signatures_
 ///
+///
 
-class MetronomeController extends StateNotifier<Metronome> {
-  MetronomeController() : super(Metronome(100, Signature(1, 2)));
+@riverpod
+class MetronomeController extends _$MetronomeController {
+  Timer? timer;
+  int beatCounter = 0;
+
+  @override
+  Metronome build() => Metronome(
+        100,
+        Signature(4, 4),
+        false,
+      );
+
+  void toggle() {
+    if (state.isActive == false) {
+      state = Metronome(
+        state.tempo,
+        Signature(state.signature.firstNumeral, state.signature.secondNumeral),
+        state.isActive = true,
+      );
+      resync();
+    } else if (state.isActive == true) {
+      timer?.cancel();
+      timer = null;
+      state = Metronome(
+        state.tempo,
+        Signature(state.signature.firstNumeral, state.signature.secondNumeral),
+        state.isActive = false,
+      );
+    }
+  }
+
+  void resync() {
+    if (state.isActive == true) {
+      timer?.cancel();
+      timer = null;
+      timer = Timer.periodic(
+          Duration(milliseconds: 60000 ~/ state.tempo), (timer) => tick());
+    }
+  }
+
+  void tick() {
+    if (beatCounter % state.signature.firstNumeral == 0 || beatCounter == 0) {
+      print("TICK");
+    } else {
+      print("Tick");
+    }
+    beatCounter++;
+  }
 
   void changeTempo(value) {
-    state = Metronome(state.tempo = value,
-        Signature(state.signature.firstNumeral, state.signature.secondNumeral));
+    state = Metronome(
+      state.tempo = value,
+      Signature(state.signature.firstNumeral, state.signature.secondNumeral),
+      state.isActive,
+    );
   }
 
   void increaseTempo() {
     if (state.tempo < 250) {
       state = Metronome(
-          state.tempo + 1,
-          Signature(
-              state.signature.firstNumeral, state.signature.secondNumeral));
+        state.tempo + 1,
+        Signature(state.signature.firstNumeral, state.signature.secondNumeral),
+        state.isActive,
+      );
     }
   }
 
   void decreaseTempo() {
     if (state.tempo > 31) {
       state = Metronome(
-          state.tempo - 1,
-          Signature(
-              state.signature.firstNumeral, state.signature.secondNumeral));
+        state.tempo - 1,
+        Signature(state.signature.firstNumeral, state.signature.secondNumeral),
+        state.isActive,
+      );
     }
   }
 
   void increaseFirstNumeral() {
     if (state.signature.firstNumeral < 4) {
       state = Metronome(
-          state.tempo,
-          Signature(
-              state.signature.firstNumeral + 1, state.signature.secondNumeral));
+        state.tempo,
+        Signature(
+            state.signature.firstNumeral + 1, state.signature.secondNumeral),
+        state.isActive,
+      );
     }
   }
 
   void decreaseFirstNumeral() {
     if (state.signature.firstNumeral > 1) {
       state = Metronome(
-          state.tempo,
-          Signature(
-              state.signature.firstNumeral - 1, state.signature.secondNumeral));
+        state.tempo,
+        Signature(
+            state.signature.firstNumeral - 1, state.signature.secondNumeral),
+        state.isActive,
+      );
     }
   }
 
   void increaseSecondNumeral() {
     if (state.signature.secondNumeral < 4) {
       state = Metronome(
-          state.tempo,
-          Signature(
-              state.signature.firstNumeral, state.signature.secondNumeral + 1));
+        state.tempo,
+        Signature(
+            state.signature.firstNumeral, state.signature.secondNumeral + 1),
+        state.isActive,
+      );
     }
   }
 
   void decreaseSecondNumeral() {
     if (state.signature.secondNumeral > 1) {
       state = Metronome(
-          state.tempo,
-          Signature(
-              state.signature.firstNumeral, state.signature.secondNumeral - 1));
+        state.tempo,
+        Signature(
+            state.signature.firstNumeral, state.signature.secondNumeral - 1),
+        state.isActive,
+      );
     }
   }
 }
-
-final metronomeControllerProvider =
-    StateNotifierProvider<MetronomeController, Metronome>((ref) {
-  return MetronomeController();
-});
 
 class MainPage extends ConsumerWidget {
   const MainPage({super.key});
