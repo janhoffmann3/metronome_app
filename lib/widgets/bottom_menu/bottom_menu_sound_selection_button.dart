@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:metronome_app/widgets/sound_selection/sound_selection_widget.dart';
 
 import '../../resources/values/app_colors.dart';
 import '../../resources/values/app_fonts.dart';
@@ -9,13 +11,13 @@ import 'bottom_menu_modal_sheet_wrapper.dart';
 ///
 /// Used for selecting sound of a tick.
 ///
-class BottomMenuSoundSelectionButton extends StatelessWidget {
+class BottomMenuSoundSelectionButton extends ConsumerWidget {
   const BottomMenuSoundSelectionButton({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
         Container(
@@ -34,6 +36,7 @@ class BottomMenuSoundSelectionButton extends StatelessWidget {
                       return const BottomMenuModalSheetWrapper(
                         height: 650,
                         titleText: "Select sound",
+                        child: SoundSelectionWidget(),
                       );
                     }));
               },

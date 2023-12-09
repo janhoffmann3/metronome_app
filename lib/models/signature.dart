@@ -1,6 +1,6 @@
 class Signature {
-  final int firstNumeral;
-  final int secondNumeral;
+  int firstNumeral;
+  int secondNumeral;
 
   Signature(this.firstNumeral, this.secondNumeral);
 }

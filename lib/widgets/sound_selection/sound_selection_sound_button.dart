@@ -7,8 +7,13 @@ import '../../resources/values/app_colors.dart';
 class SoundSelectionSoundButton extends StatelessWidget {
   final String name;
   final bool selected;
+  final Function() onPressed;
+
   const SoundSelectionSoundButton(
-      {super.key, this.name = "", this.selected = false});
+      {super.key,
+      this.name = "",
+      this.selected = false,
+      required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +21,13 @@ class SoundSelectionSoundButton extends StatelessWidget {
       return Container(
         width: 340,
         height: 56,
-        margin: const EdgeInsets.only(bottom: 20),
+        margin: const EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
             color: AppColors.secondary900,
             border: Border.all(color: AppColors.secondary500),
             borderRadius: BorderRadius.circular(10)),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             elevation: 0,
             backgroundColor: Colors.transparent,
@@ -48,7 +53,7 @@ class SoundSelectionSoundButton extends StatelessWidget {
             color: AppColors.primary400,
             borderRadius: BorderRadius.circular(10)),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             elevation: 0,
             backgroundColor: Colors.transparent,
@@ -58,7 +63,7 @@ class SoundSelectionSoundButton extends StatelessWidget {
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Text(
-              "Piano",
+              name,
               textAlign: TextAlign.left,
               style: AppFonts.bodyLarge,
             ),

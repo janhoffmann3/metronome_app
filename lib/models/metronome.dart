@@ -2,8 +2,9 @@ import 'signature.dart';
 
 class Metronome {
   int tempo;
-  final Signature signature;
+  Signature signature;
   bool isActive;
+  String sound;
 
-  Metronome(this.tempo, this.signature, this.isActive);
+  Metronome(this.tempo, this.signature, this.isActive, this.sound);
 }

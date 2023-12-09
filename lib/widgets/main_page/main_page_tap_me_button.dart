@@ -22,6 +22,7 @@ class MainPageTapMeButton extends ConsumerWidget {
     int tempo = metronome.tempo;
     int firstNumeral = metronome.signature.firstNumeral;
     int secondNumeral = metronome.signature.secondNumeral;
+    String sound = metronome.sound;
 
     return Center(
       child: Container(
@@ -32,7 +33,8 @@ class MainPageTapMeButton extends ConsumerWidget {
               border: Border.all(color: AppColors.primary400)),
           child: ElevatedButton(
             onPressed: () {
-              print("Tempo: $tempo, Signature: $firstNumeral / $secondNumeral");
+              print(
+                  "Tempo: $tempo, Signature: $firstNumeral / $secondNumeral Sound: $sound");
             },
             style: ElevatedButton.styleFrom(
               elevation: 0,

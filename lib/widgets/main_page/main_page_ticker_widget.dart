@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../resources/values/app_colors.dart';
 
 /// ### The ticker widget
@@ -7,13 +8,13 @@ import '../../resources/values/app_colors.dart';
 /// When the beat changes, the specific container's background color changes with it.
 ///
 
-class MainPageTickerWidget extends StatelessWidget {
+class MainPageTickerWidget extends ConsumerWidget {
   const MainPageTickerWidget({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Center(
       child: SizedBox(
         width: 125,
