@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "522332906905",
+    "project_id": "metronome-app-f8d87",
+    "storage_bucket": "metronome-app-f8d87.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:522332906905:android:082b57050d4ef7d7449f08",
+        "android_client_info": {
+          "package_name": "com.example.metronome_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5aEN24zuq_wu928PVUTjYaLEMfhWNzs0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
