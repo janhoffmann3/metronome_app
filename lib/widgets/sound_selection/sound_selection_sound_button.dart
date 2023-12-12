@@ -19,7 +19,9 @@ class SoundSelectionSoundButton extends StatelessWidget {
   Widget build(BuildContext context) {
     if (!selected) {
       return Container(
-        width: 340,
+        width: MediaQuery.of(context).size.width > 480
+            ? 340
+            : MediaQuery.of(context).size.width * 0.85,
         height: 56,
         margin: const EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
@@ -46,7 +48,9 @@ class SoundSelectionSoundButton extends StatelessWidget {
       );
     } else {
       return Container(
-        width: 340,
+        width: MediaQuery.of(context).size.width > 480
+            ? 340
+            : MediaQuery.of(context).size.width * 0.85,
         height: 56,
         margin: const EdgeInsets.only(bottom: 20),
         decoration: BoxDecoration(

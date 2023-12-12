@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:metronome_app/pages/auth/landing_page.dart';
+import 'package:metronome_app/pages/auth/sign_up_page.dart';
 import 'package:metronome_app/pages/main_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';

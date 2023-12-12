@@ -31,6 +31,13 @@ class AppFonts {
     color: AppColors.secondary200,
   );
 
+  static TextStyle bodyMedium = GoogleFonts.inter(
+    fontSize: 14,
+    fontWeight: FontWeight.normal,
+    letterSpacing: 0,
+    color: AppColors.secondary200,
+  );
+
   static TextStyle bodyLargeWhite = GoogleFonts.inter(
     fontSize: 16,
     fontWeight: FontWeight.w500,

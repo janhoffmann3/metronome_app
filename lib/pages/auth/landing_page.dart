@@ -4,8 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:metronome_app/resources/values/app_colors.dart';
 import 'package:metronome_app/resources/values/app_fonts.dart';
 
-class AuthPage extends ConsumerWidget {
-  const AuthPage({super.key});
+class LandingPage extends ConsumerWidget {
+  const LandingPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -52,7 +52,9 @@ class AuthPage extends ConsumerWidget {
               ),
               Container(
                 height: 56,
-                width: 340,
+                width: MediaQuery.of(context).size.width > 480
+                    ? 340
+                    : MediaQuery.of(context).size.width * 0.85,
                 margin: const EdgeInsets.only(top: 15),
 
                 // It has a decoration of a rectangle with rounded corners. The radius is 10px.
@@ -92,7 +94,9 @@ class AuthPage extends ConsumerWidget {
               ),
               Container(
                 height: 56,
-                width: 340,
+                width: MediaQuery.of(context).size.width > 480
+                    ? 340
+                    : MediaQuery.of(context).size.width * 0.85,
                 margin: const EdgeInsets.only(top: 15),
 
                 // It has a decoration of a rectangle with rounded corners. The radius is 10px.
@@ -131,7 +135,9 @@ class AuthPage extends ConsumerWidget {
               ),
               Container(
                 height: 56,
-                width: 340,
+                width: MediaQuery.of(context).size.width > 480
+                    ? 340
+                    : MediaQuery.of(context).size.width * 0.85,
                 margin: const EdgeInsets.only(top: 15),
 
                 // It has a decoration of a rectangle with rounded corners. The radius is 10px.
