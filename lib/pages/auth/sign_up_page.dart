@@ -65,7 +65,8 @@ class SignUpPage extends ConsumerWidget {
               ),
               Text(
                 "Enter your email and password",
-                style: AppFonts.bodyLargeGrey,
+                style:
+                    AppFonts.bodyLarge.copyWith(color: AppColors.secondary500),
               ),
               const SizedBox(
                 height: 40,
@@ -156,7 +157,8 @@ class SignUpPage extends ConsumerWidget {
                   // Title of the button.
                   child: Text(
                     "Continue",
-                    style: AppFonts.bodyLargeDark,
+                    style: AppFonts.bodyLarge
+                        .copyWith(color: AppColors.secondary900),
                   ),
 
                   // Icon - always chevron_right since it is a navigation button.

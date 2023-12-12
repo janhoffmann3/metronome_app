@@ -45,7 +45,8 @@ class LandingPage extends ConsumerWidget {
               ),
               Text(
                 "Sign in and we'll get started",
-                style: AppFonts.bodyLargeGrey,
+                style:
+                    AppFonts.bodyLarge.copyWith(color: AppColors.secondary500),
               ),
               const SizedBox(
                 height: 15,
@@ -85,7 +86,8 @@ class LandingPage extends ConsumerWidget {
                         ),
                         Text(
                           "Continue with google",
-                          style: AppFonts.bodyLargeDark,
+                          style: AppFonts.bodyLarge
+                              .copyWith(color: AppColors.secondary900),
                         ),
                       ]
                       // Icon - always chevron_right since it is a navigation button.

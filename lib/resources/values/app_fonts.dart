@@ -38,27 +38,6 @@ class AppFonts {
     color: AppColors.secondary200,
   );
 
-  static TextStyle bodyLargeWhite = GoogleFonts.inter(
-    fontSize: 16,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0,
-    color: AppColors.white,
-  );
-
-  static TextStyle bodyLargeGrey = GoogleFonts.inter(
-    fontSize: 16,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0,
-    color: AppColors.secondary500,
-  );
-
-  static TextStyle bodyLargeDark = GoogleFonts.inter(
-    fontSize: 16,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0,
-    color: AppColors.secondary900,
-  );
-
   static TextStyle labelSmall = GoogleFonts.inter(
     fontSize: 12,
     fontWeight: FontWeight.w500,
