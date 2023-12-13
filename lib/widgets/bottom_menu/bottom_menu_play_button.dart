@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:metronome_app/pages/main_page.dart';
 
 import '../../resources/values/app_colors.dart';
+import '../../state/metronome_controller.dart';
 
 /// ### Play button widget from the bottom menu
 ///

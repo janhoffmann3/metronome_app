@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:metronome_app/pages/main_page.dart';
 
 import '../../models/metronome.dart';
 import '../../resources/values/app_colors.dart';
 import '../../resources/values/app_fonts.dart';
+import '../../state/metronome_controller.dart';
 
 /// ### Tap me button
 ///
