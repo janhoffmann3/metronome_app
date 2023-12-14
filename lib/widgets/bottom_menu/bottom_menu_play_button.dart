@@ -23,6 +23,7 @@ class BottomMenuPlayButton extends ConsumerWidget {
         height: 90,
         margin: const EdgeInsets.only(top: 40),
         child: FloatingActionButton(
+            heroTag: null,
             onPressed: () {
               ref.watch(metronomeControllerProvider.notifier).toggle();
             },

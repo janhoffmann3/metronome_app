@@ -1,8 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../models/metronome.dart';
+import '../entities/metronome.dart';
 import 'dart:async';
 
-import '../models/signature.dart';
+import '../entities/signature.dart';
 
 part 'metronome_controller.g.dart';
 
@@ -12,26 +12,20 @@ class MetronomeController extends _$MetronomeController {
   int beatCounter = 0;
 
   @override
-  Metronome build() => Metronome(100, Signature(4, 4), false, "Piano");
+  Metronome build() => const Metronome(
+      tempo: 100,
+      signature: Signature(firstNumeral: 4, secondNumeral: 4),
+      isActive: false,
+      sound: "Piano");
 
   void toggle() {
     if (state.isActive == false) {
-      state = Metronome(
-          state.tempo,
-          Signature(
-              state.signature.firstNumeral, state.signature.secondNumeral),
-          state.isActive = true,
-          state.sound);
+      state = state.copyWith(isActive: true);
       resync();
     } else if (state.isActive == true) {
       timer?.cancel();
       timer = null;
-      state = Metronome(
-          state.tempo,
-          Signature(
-              state.signature.firstNumeral, state.signature.secondNumeral),
-          state.isActive = false,
-          state.sound);
+      state = state.copyWith(isActive: false);
     }
   }
 
@@ -52,109 +46,75 @@ class MetronomeController extends _$MetronomeController {
   void tick() {
     if (beatCounter % state.signature.secondNumeral == 0 || beatCounter == 0) {
       print("TICK");
-      //assetsAudioPlayerM.play();
     } else {
-      //assetsAudioPlayerS.play();
-
       print("Tick");
     }
     beatCounter++;
   }
 
   void changeTempo(value) {
-    state = Metronome(
-        state.tempo = value,
-        Signature(state.signature.firstNumeral, state.signature.secondNumeral),
-        state.isActive,
-        state.sound);
+    state = state.copyWith(tempo: value);
   }
 
   void increaseTempo() {
     if (state.tempo < 250) {
-      state = Metronome(
-          state.tempo + 1,
-          Signature(
-              state.signature.firstNumeral, state.signature.secondNumeral),
-          state.isActive,
-          state.sound);
+      state = state.copyWith(tempo: state.tempo + 1);
     }
   }
 
   void decreaseTempo() {
     if (state.tempo > 31) {
-      state = Metronome(
-          state.tempo - 1,
-          Signature(
-              state.signature.firstNumeral, state.signature.secondNumeral),
-          state.isActive,
-          state.sound);
+      state = state.copyWith(tempo: state.tempo - 1);
     }
   }
 
   void increaseFirstNumeral() {
     if (state.signature.firstNumeral < 16) {
-      state = Metronome(
-          state.tempo,
-          Signature(
-              state.signature.firstNumeral + 1, state.signature.secondNumeral),
-          state.isActive,
-          state.sound);
+      state = state.copyWith(
+          signature: Signature(
+              firstNumeral: state.signature.firstNumeral + 1,
+              secondNumeral: state.signature.secondNumeral));
     }
   }
 
   void decreaseFirstNumeral() {
     if (state.signature.firstNumeral > 1) {
-      state = Metronome(
-          state.tempo,
-          Signature(
-              state.signature.firstNumeral - 1, state.signature.secondNumeral),
-          state.isActive,
-          state.sound);
+      state = state.copyWith(
+          signature: Signature(
+              firstNumeral: state.signature.firstNumeral - 1,
+              secondNumeral: state.signature.secondNumeral));
     }
   }
 
   void increaseSecondNumeral() {
     if (state.signature.secondNumeral < 4) {
-      state = Metronome(
-          state.tempo,
-          Signature(
-              state.signature.firstNumeral, state.signature.secondNumeral + 1),
-          state.isActive,
-          state.sound);
+      state = state.copyWith(
+          signature: Signature(
+              firstNumeral: state.signature.firstNumeral,
+              secondNumeral: state.signature.secondNumeral + 1));
     } else if (state.signature.secondNumeral == 4) {
-      state = Metronome(
-          state.tempo,
-          Signature(
-              state.signature.firstNumeral, state.signature.secondNumeral = 8),
-          state.isActive,
-          state.sound);
+      state = state.copyWith(
+          signature: Signature(
+              firstNumeral: state.signature.firstNumeral, secondNumeral: 8));
+      print(state);
     }
   }
 
   void decreaseSecondNumeral() {
     if (state.signature.secondNumeral > 1 &&
         state.signature.secondNumeral != 8) {
-      state = Metronome(
-          state.tempo,
-          Signature(
-              state.signature.firstNumeral, state.signature.secondNumeral - 1),
-          state.isActive,
-          state.sound);
+      state = state.copyWith(
+          signature: Signature(
+              firstNumeral: state.signature.firstNumeral,
+              secondNumeral: state.signature.secondNumeral - 1));
     } else if (state.signature.secondNumeral == 8) {
-      state = Metronome(
-          state.tempo,
-          Signature(
-              state.signature.firstNumeral, state.signature.secondNumeral = 4),
-          state.isActive,
-          state.sound);
+      state = state.copyWith(
+          signature: Signature(
+              firstNumeral: state.signature.firstNumeral, secondNumeral: 4));
     }
   }
 
   void selectSound(String sound) {
-    state = Metronome(
-        state.tempo,
-        Signature(state.signature.firstNumeral, state.signature.secondNumeral),
-        state.isActive,
-        state.sound = sound);
+    state = state.copyWith(sound: sound);
   }
 }

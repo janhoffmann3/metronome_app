@@ -12,6 +12,7 @@ import '../../resources/values/app_fonts.dart';
 class DrawerMenuSelectionButton extends StatelessWidget {
   /// Button title
   final String titleText;
+
   const DrawerMenuSelectionButton({
     super.key,
     required this.titleText,

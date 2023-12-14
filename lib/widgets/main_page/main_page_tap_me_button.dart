@@ -1,10 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../models/metronome.dart';
 import '../../resources/values/app_colors.dart';
 import '../../resources/values/app_fonts.dart';
-import '../../state/metronome_controller.dart';
 
 /// ### Tap me button
 ///
@@ -18,12 +17,6 @@ class MainPageTapMeButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Metronome metronome = ref.watch(metronomeControllerProvider);
-    int tempo = metronome.tempo;
-    int firstNumeral = metronome.signature.firstNumeral;
-    int secondNumeral = metronome.signature.secondNumeral;
-    String sound = metronome.sound;
-
     return Center(
       child: Container(
           width: 160,
@@ -33,8 +26,7 @@ class MainPageTapMeButton extends ConsumerWidget {
               border: Border.all(color: AppColors.primary400)),
           child: ElevatedButton(
             onPressed: () {
-              print(
-                  "Tempo: $tempo, Signature: $firstNumeral / $secondNumeral Sound: $sound");
+              FirebaseAuth.instance.signOut();
             },
             style: ElevatedButton.styleFrom(
               elevation: 0,

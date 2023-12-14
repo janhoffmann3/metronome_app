@@ -1,12 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:metronome_app/models/user.dart' as app_user;
 import 'package:metronome_app/resources/values/app_colors.dart';
 import 'package:metronome_app/resources/values/app_fonts.dart';
-import 'package:metronome_app/state/auth_provider.dart';
+import 'package:metronome_app/services/user_service.dart';
 
 class SignUpPage extends ConsumerWidget {
   const SignUpPage({super.key});
+  static String get routeName => 'signup';
+  static String get routeLocation => '/auth/$routeName';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,9 +36,7 @@ class SignUpPage extends ConsumerWidget {
               children: [
                 IconButton(
                   onPressed: () {
-                    print(ref.watch(authProvider.select(
-                      (value) => value.valueOrNull?.email,
-                    )));
+                    context.go("/auth");
                   },
                   icon: const Icon(
                     Icons.arrow_back,
@@ -184,9 +186,20 @@ class SignUpPage extends ConsumerWidget {
                   child: ElevatedButton(
                     onPressed: () async {
                       if (formKey.currentState!.validate()) {
-                        await FirebaseAuth.instance.signInWithEmailAndPassword(
-                            email: emailController.text,
-                            password: passwordController.text);
+                        await FirebaseAuth.instance
+                            .createUserWithEmailAndPassword(
+                                email: emailController.text,
+                                password: passwordController.text);
+
+                        final user = FirebaseAuth.instance.currentUser;
+                        const u = app_user.User(
+                            id: null,
+                            favorites: null,
+                            settings: null,
+                            username: "asdasd",
+                            email: "asdasd");
+
+                        createUser(u);
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -209,8 +222,8 @@ class SignUpPage extends ConsumerWidget {
                   height: 10,
                 ),
                 InkWell(
-                  onTap: () async {
-                    await FirebaseAuth.instance.signOut();
+                  onTap: () {
+                    context.go("/auth/login");
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

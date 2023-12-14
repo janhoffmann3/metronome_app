@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:metronome_app/resources/values/app_colors.dart';
 import 'package:metronome_app/resources/values/app_fonts.dart';
 
-class LandingPage extends ConsumerWidget {
-  const LandingPage({super.key});
+class AuthPage extends ConsumerWidget {
+  const AuthPage({super.key});
+  static String get routeName => 'auth';
+  static String get routeLocation => '/$routeName';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -109,7 +112,9 @@ class LandingPage extends ConsumerWidget {
 
                 // The ElevatedButton is a child of the Container. It makes the button clickable.
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.go("/auth/signup");
+                  },
                   style: ElevatedButton.styleFrom(
                     elevation: 0,
                     backgroundColor: Colors.transparent,
@@ -150,7 +155,9 @@ class LandingPage extends ConsumerWidget {
 
                 // The ElevatedButton is a child of the Container. It makes the button clickable.
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.go("/auth/login");
+                  },
                   style: ElevatedButton.styleFrom(
                     elevation: 0,
                     backgroundColor: Colors.transparent,

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:metronome_app/pages/auth/landing_page.dart';
-import 'package:metronome_app/pages/auth/log_in_page.dart';
-import 'package:metronome_app/pages/auth/sign_up_page.dart';
-import 'package:metronome_app/pages/main_page.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:metronome_app/routes/app_router.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -14,14 +11,18 @@ Future<void> main() async {
   runApp(const ProviderScope(child: MainApp()));
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends ConsumerWidget {
   const MainApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: SignUpPage(),
-      debugShowCheckedModeBanner: false,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(appRouterProvider);
+
+    return MaterialApp.router(
+      routeInformationParser: router.routeInformationParser,
+      routerDelegate: router.routerDelegate,
+      routeInformationProvider: router.routeInformationProvider,
+      title: "Metronome app",
     );
   }
 }

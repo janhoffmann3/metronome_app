@@ -4,6 +4,7 @@ import 'package:metronome_app/resources/values/app_colors.dart';
 import 'package:metronome_app/resources/values/app_fonts.dart';
 import 'package:metronome_app/resources/values/app_sizes.dart';
 
+import '../state/auth_provider.dart';
 import '../widgets/drawer/drawer_menu_selection_button.dart';
 import '../widgets/main_page/main_page_bottom_menu_widget.dart';
 import '../widgets/main_page/main_page_display_widget.dart';
@@ -25,9 +26,15 @@ import '../widgets/main_page/main_page_ticker_widget.dart';
 
 class MainPage extends ConsumerWidget {
   const MainPage({super.key});
+  static String get routeName => 'main';
+  static String get routeLocation => '/';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final name = ref.watch(authProvider.select(
+      (value) => value.valueOrNull?.email,
+    ));
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       extendBodyBehindAppBar: true,
@@ -86,8 +93,9 @@ class MainPage extends ConsumerWidget {
                               style: AppFonts.titleSmall,
                             ),
                             Text(
-                              "John!",
-                              style: AppFonts.displaySmall,
+                              name ?? "Not logged in",
+                              style:
+                                  AppFonts.displaySmall.copyWith(fontSize: 20),
                             )
                           ],
                         )),

@@ -27,6 +27,7 @@ class BottomMenuSoundSelectionButton extends ConsumerWidget {
               borderRadius: const BorderRadius.all(Radius.circular(50)),
               border: Border.all(color: AppColors.secondary500)),
           child: FloatingActionButton(
+              heroTag: null,
               onPressed: () {
                 showModalBottomSheet(
                     backgroundColor: Colors.transparent,

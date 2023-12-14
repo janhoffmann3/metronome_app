@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:metronome_app/widgets/signature_selection/signature_selection_widget.dart';
 
-import '../../models/metronome.dart';
+import '../../entities/metronome.dart';
 import '../../resources/values/app_colors.dart';
 import '../../resources/values/app_fonts.dart';
 import '../../state/metronome_controller.dart';
@@ -33,6 +33,7 @@ class BottomMenuSignatureSelectionButton extends ConsumerWidget {
               borderRadius: const BorderRadius.all(Radius.circular(50)),
               border: Border.all(color: AppColors.secondary500)),
           child: FloatingActionButton(
+            heroTag: null,
             onPressed: () {
               showModalBottomSheet(
                   backgroundColor: Colors.transparent,
