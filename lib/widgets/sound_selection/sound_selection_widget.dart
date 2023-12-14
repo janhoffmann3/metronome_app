@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:metronome_app/models/metronome.dart';
-import 'package:metronome_app/pages/main_page.dart';
 
+import '../../entities/metronome.dart';
+import '../../state/metronome_controller.dart';
 import 'sound_selection_sound_button.dart';
 
 class SoundSelectionWidget extends ConsumerWidget {

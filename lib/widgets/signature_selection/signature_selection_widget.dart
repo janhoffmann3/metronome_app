@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:metronome_app/pages/main_page.dart';
 
-import '../../models/metronome.dart';
+import '../../entities/metronome.dart';
 import '../../resources/values/app_colors.dart';
 import '../../resources/values/app_fonts.dart';
+import '../../state/metronome_controller.dart';
 import 'signature_selection_signature_display_widget.dart';
 
 /// ### Signature selection widget
@@ -47,6 +47,7 @@ class SignatureSelectionWidget extends ConsumerWidget {
                     ref
                         .read(metronomeControllerProvider.notifier)
                         .increaseFirstNumeral();
+                    ref.read(metronomeControllerProvider.notifier).resync();
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.transparent),
@@ -78,6 +79,7 @@ class SignatureSelectionWidget extends ConsumerWidget {
                     ref
                         .read(metronomeControllerProvider.notifier)
                         .decreaseFirstNumeral();
+                    ref.read(metronomeControllerProvider.notifier).resync();
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.transparent),
@@ -109,6 +111,7 @@ class SignatureSelectionWidget extends ConsumerWidget {
                     ref
                         .read(metronomeControllerProvider.notifier)
                         .increaseSecondNumeral();
+                    ref.read(metronomeControllerProvider.notifier).resync();
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.transparent),
@@ -138,6 +141,7 @@ class SignatureSelectionWidget extends ConsumerWidget {
                     ref
                         .read(metronomeControllerProvider.notifier)
                         .decreaseSecondNumeral();
+                    ref.read(metronomeControllerProvider.notifier).resync();
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.transparent),
