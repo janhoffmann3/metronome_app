@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:metronome_app/pages/about/about_page.dart';
 import 'package:metronome_app/pages/auth/auth_page.dart';
 import 'package:metronome_app/pages/auth/log_in_page.dart';
 import 'package:metronome_app/pages/auth/sign_up_page.dart';
 import 'package:metronome_app/pages/main_page.dart';
+import 'package:metronome_app/pages/settings/settings_page.dart';
 
 import '../state/auth_provider.dart';
 
@@ -43,7 +45,21 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         builder: (context, state) {
           return const MainPage();
         },
-      )
+      ),
+      GoRoute(
+        path: AboutPage.routeLocation,
+        name: AboutPage.routeName,
+        builder: (context, state) {
+          return const AboutPage();
+        },
+      ),
+      GoRoute(
+        path: SettingsPage.routeLocation,
+        name: SettingsPage.routeName,
+        builder: (context, state) {
+          return const SettingsPage();
+        },
+      ),
     ],
     redirect: (context, state) {
       if (authState.isLoading || authState.hasError) return null;

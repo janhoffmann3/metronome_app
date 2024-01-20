@@ -69,7 +69,9 @@ class AuthPage extends ConsumerWidget {
 
                 // The ElevatedButton is a child of the Container. It makes the button clickable.
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.go("/");
+                  },
                   style: ElevatedButton.styleFrom(
                     elevation: 0,
                     backgroundColor: Colors.transparent,

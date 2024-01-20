@@ -12,10 +12,12 @@ import '../../resources/values/app_fonts.dart';
 class DrawerMenuSelectionButton extends StatelessWidget {
   /// Button title
   final String titleText;
+  final Function() onPressed;
 
   const DrawerMenuSelectionButton({
     super.key,
     required this.titleText,
+    required this.onPressed,
   });
 
   @override
@@ -33,7 +35,7 @@ class DrawerMenuSelectionButton extends StatelessWidget {
 
       // The ElevatedButton is a child of the Container. It makes the button clickable.
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           elevation: 0,
           backgroundColor: Colors.transparent,

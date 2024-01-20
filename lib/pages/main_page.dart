@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:metronome_app/resources/values/app_colors.dart';
 import 'package:metronome_app/resources/values/app_fonts.dart';
 import 'package:metronome_app/resources/values/app_sizes.dart';
@@ -105,12 +106,27 @@ class MainPage extends ConsumerWidget {
                   height: 40,
                 ),
                 // A column containing the list of links to menus.
-                const Column(
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    DrawerMenuSelectionButton(titleText: "Favorites"),
-                    DrawerMenuSelectionButton(titleText: "Settings"),
-                    DrawerMenuSelectionButton(titleText: "About")
+                    DrawerMenuSelectionButton(
+                      titleText: "Favorites",
+                      onPressed: () {
+                        context.go("/favorites");
+                      },
+                    ),
+                    DrawerMenuSelectionButton(
+                      titleText: "Settings",
+                      onPressed: () {
+                        context.go("/settings");
+                      },
+                    ),
+                    DrawerMenuSelectionButton(
+                      titleText: "About",
+                      onPressed: () {
+                        context.go("/about");
+                      },
+                    )
                   ],
                 ),
                 const Spacer(flex: 6),

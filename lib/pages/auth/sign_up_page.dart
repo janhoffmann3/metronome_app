@@ -2,10 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:metronome_app/models/user.dart' as app_user;
 import 'package:metronome_app/resources/values/app_colors.dart';
 import 'package:metronome_app/resources/values/app_fonts.dart';
-import 'package:metronome_app/services/user_service.dart';
 
 class SignUpPage extends ConsumerWidget {
   const SignUpPage({super.key});
@@ -190,16 +188,6 @@ class SignUpPage extends ConsumerWidget {
                             .createUserWithEmailAndPassword(
                                 email: emailController.text,
                                 password: passwordController.text);
-
-                        final user = FirebaseAuth.instance.currentUser;
-                        const u = app_user.User(
-                            id: null,
-                            favorites: null,
-                            settings: null,
-                            username: "asdasd",
-                            email: "asdasd");
-
-                        createUser(u);
                       }
                     },
                     style: ElevatedButton.styleFrom(

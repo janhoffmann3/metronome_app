@@ -3,6 +3,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:metronome_app/resources/values/app_colors.dart';
 
 class AppFonts {
+  static TextStyle regular = GoogleFonts.inter(
+      fontSize: 14,
+      fontWeight: FontWeight.normal,
+      letterSpacing: 0,
+      color: AppColors.secondary200);
+
+  static TextStyle titleLarge = GoogleFonts.inter(
+      fontSize: 28,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0,
+      color: AppColors.secondary200);
+
   static TextStyle titleNormal = GoogleFonts.inter(
       fontSize: 24,
       fontWeight: FontWeight.w600,
@@ -34,6 +46,13 @@ class AppFonts {
   static TextStyle bodyMedium = GoogleFonts.inter(
     fontSize: 14,
     fontWeight: FontWeight.normal,
+    letterSpacing: 0,
+    color: AppColors.secondary200,
+  );
+
+  static TextStyle labelLarge = GoogleFonts.inter(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
     letterSpacing: 0,
     color: AppColors.secondary200,
   );
