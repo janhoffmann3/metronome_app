@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:metronome_app/resources/values/app_colors.dart';
 import 'package:metronome_app/resources/values/app_fonts.dart';
 import 'package:metronome_app/resources/values/app_sizes.dart';
+import 'package:metronome_app/state/metronome_controller.dart';
 
 import '../state/auth_provider.dart';
 import '../widgets/drawer/drawer_menu_selection_button.dart';
@@ -35,6 +36,8 @@ class MainPage extends ConsumerWidget {
     final name = ref.watch(authProvider.select(
       (value) => value.valueOrNull?.email,
     ));
+
+    final metronome = ref.watch(metronomeControllerProvider);
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -156,29 +159,31 @@ class MainPage extends ConsumerWidget {
                 fit: BoxFit.cover)),
 
         // Child collum containing TickerWidget, DisplayWidget, TempoSlider, TapMeButton and BottomMenuWidget.
-        child: const Column(
+        child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Spacer(flex: 2),
+              const Spacer(flex: 2),
 
               // A widget that displays the current beat.
-              MainPageTickerWidget(),
-              SizedBox(height: 80),
+              MainPageTickerWidget(
+                  metronome.beatCounter % metronome.signature.firstNumeral,
+                  metronome.signature.firstNumeral),
 
+              const SizedBox(height: 80),
               // A widget that shows the selected tempo and contains plus/minus controls.
-              MainPageDisplayWidget(),
-              Spacer(flex: 2),
+              const MainPageDisplayWidget(),
+              const Spacer(flex: 2),
 
               // A widget for setting the tempo.
-              MainPageTempoSlider(),
-              Spacer(flex: 2),
+              const MainPageTempoSlider(),
+              const Spacer(flex: 1),
 
               // A button for manually tapping the tempo.
-              MainPageTapMeButton(),
+              const MainPageTapMeButton(),
 
               // A widget with sound selection, signature selection and play/stop button.
-              MainPageBottomMenuWidget(),
-              SizedBox(
+              const MainPageBottomMenuWidget(),
+              const SizedBox(
                 height: 20,
               )
             ]),

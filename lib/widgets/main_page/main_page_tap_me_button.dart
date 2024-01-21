@@ -1,6 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:metronome_app/state/metronome_controller.dart';
 
 import '../../resources/values/app_colors.dart';
 import '../../resources/values/app_fonts.dart';
@@ -26,7 +26,7 @@ class MainPageTapMeButton extends ConsumerWidget {
               border: Border.all(color: AppColors.primary400)),
           child: ElevatedButton(
             onPressed: () {
-              FirebaseAuth.instance.signOut();
+              ref.watch(metronomeControllerProvider.notifier).onTapTempo();
             },
             style: ElevatedButton.styleFrom(
               elevation: 0,

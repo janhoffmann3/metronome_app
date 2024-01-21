@@ -10,5 +10,6 @@ class Metronome with _$Metronome {
     required Signature signature,
     required bool isActive,
     required String sound,
+    required int beatCounter,
   }) = _Metronome;
 }

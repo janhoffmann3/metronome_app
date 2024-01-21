@@ -5,8 +5,10 @@ import 'package:metronome_app/pages/about/about_page.dart';
 import 'package:metronome_app/pages/auth/auth_page.dart';
 import 'package:metronome_app/pages/auth/log_in_page.dart';
 import 'package:metronome_app/pages/auth/sign_up_page.dart';
+import 'package:metronome_app/pages/favorites/favorites_page.dart';
 import 'package:metronome_app/pages/main_page.dart';
 import 'package:metronome_app/pages/settings/settings_page.dart';
+import 'package:metronome_app/pages/settings/settings_username_page.dart';
 
 import '../state/auth_provider.dart';
 
@@ -58,6 +60,20 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: SettingsPage.routeName,
         builder: (context, state) {
           return const SettingsPage();
+        },
+      ),
+      GoRoute(
+        path: FavoritesPage.routeLocation,
+        name: FavoritesPage.routeName,
+        builder: (context, state) {
+          return const FavoritesPage();
+        },
+      ),
+      GoRoute(
+        path: SettingsUsernamePage.routeLocation,
+        name: SettingsUsernamePage.routeName,
+        builder: (context, state) {
+          return const SettingsUsernamePage();
         },
       ),
     ],

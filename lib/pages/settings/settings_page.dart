@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -119,7 +118,7 @@ class SettingsPage extends ConsumerWidget {
                       borderRadius: BorderRadius.all(Radius.circular(10))),
                   leading: const Icon(FontAwesomeIcons.solidUser),
                   title: Text(
-                    "Username",
+                    "Name",
                     style: AppFonts.bodyLarge,
                   ),
                   tileColor: AppColors.secondary700,
@@ -133,7 +132,9 @@ class SettingsPage extends ConsumerWidget {
                       FontAwesomeIcons.chevronRight,
                       size: 15,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      context.go("/settings/username-edit");
+                    },
                   ),
                 ),
               ),

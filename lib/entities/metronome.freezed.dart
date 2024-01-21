@@ -20,6 +20,7 @@ mixin _$Metronome {
   Signature get signature => throw _privateConstructorUsedError;
   bool get isActive => throw _privateConstructorUsedError;
   String get sound => throw _privateConstructorUsedError;
+  int get beatCounter => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MetronomeCopyWith<Metronome> get copyWith =>
@@ -31,7 +32,12 @@ abstract class $MetronomeCopyWith<$Res> {
   factory $MetronomeCopyWith(Metronome value, $Res Function(Metronome) then) =
       _$MetronomeCopyWithImpl<$Res, Metronome>;
   @useResult
-  $Res call({int tempo, Signature signature, bool isActive, String sound});
+  $Res call(
+      {int tempo,
+      Signature signature,
+      bool isActive,
+      String sound,
+      int beatCounter});
 
   $SignatureCopyWith<$Res> get signature;
 }
@@ -53,6 +59,7 @@ class _$MetronomeCopyWithImpl<$Res, $Val extends Metronome>
     Object? signature = null,
     Object? isActive = null,
     Object? sound = null,
+    Object? beatCounter = null,
   }) {
     return _then(_value.copyWith(
       tempo: null == tempo
@@ -71,6 +78,10 @@ class _$MetronomeCopyWithImpl<$Res, $Val extends Metronome>
           ? _value.sound
           : sound // ignore: cast_nullable_to_non_nullable
               as String,
+      beatCounter: null == beatCounter
+          ? _value.beatCounter
+          : beatCounter // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 
@@ -91,7 +102,12 @@ abstract class _$$MetronomeImplCopyWith<$Res>
       __$$MetronomeImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int tempo, Signature signature, bool isActive, String sound});
+  $Res call(
+      {int tempo,
+      Signature signature,
+      bool isActive,
+      String sound,
+      int beatCounter});
 
   @override
   $SignatureCopyWith<$Res> get signature;
@@ -112,6 +128,7 @@ class __$$MetronomeImplCopyWithImpl<$Res>
     Object? signature = null,
     Object? isActive = null,
     Object? sound = null,
+    Object? beatCounter = null,
   }) {
     return _then(_$MetronomeImpl(
       tempo: null == tempo
@@ -130,6 +147,10 @@ class __$$MetronomeImplCopyWithImpl<$Res>
           ? _value.sound
           : sound // ignore: cast_nullable_to_non_nullable
               as String,
+      beatCounter: null == beatCounter
+          ? _value.beatCounter
+          : beatCounter // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -141,7 +162,8 @@ class _$MetronomeImpl implements _Metronome {
       {required this.tempo,
       required this.signature,
       required this.isActive,
-      required this.sound});
+      required this.sound,
+      required this.beatCounter});
 
   @override
   final int tempo;
@@ -151,10 +173,12 @@ class _$MetronomeImpl implements _Metronome {
   final bool isActive;
   @override
   final String sound;
+  @override
+  final int beatCounter;
 
   @override
   String toString() {
-    return 'Metronome(tempo: $tempo, signature: $signature, isActive: $isActive, sound: $sound)';
+    return 'Metronome(tempo: $tempo, signature: $signature, isActive: $isActive, sound: $sound, beatCounter: $beatCounter)';
   }
 
   @override
@@ -167,12 +191,14 @@ class _$MetronomeImpl implements _Metronome {
                 other.signature == signature) &&
             (identical(other.isActive, isActive) ||
                 other.isActive == isActive) &&
-            (identical(other.sound, sound) || other.sound == sound));
+            (identical(other.sound, sound) || other.sound == sound) &&
+            (identical(other.beatCounter, beatCounter) ||
+                other.beatCounter == beatCounter));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, tempo, signature, isActive, sound);
+      Object.hash(runtimeType, tempo, signature, isActive, sound, beatCounter);
 
   @JsonKey(ignore: true)
   @override
@@ -186,7 +212,8 @@ abstract class _Metronome implements Metronome {
       {required final int tempo,
       required final Signature signature,
       required final bool isActive,
-      required final String sound}) = _$MetronomeImpl;
+      required final String sound,
+      required final int beatCounter}) = _$MetronomeImpl;
 
   @override
   int get tempo;
@@ -196,6 +223,8 @@ abstract class _Metronome implements Metronome {
   bool get isActive;
   @override
   String get sound;
+  @override
+  int get beatCounter;
   @override
   @JsonKey(ignore: true)
   _$$MetronomeImplCopyWith<_$MetronomeImpl> get copyWith =>
