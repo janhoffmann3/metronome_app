@@ -19,12 +19,12 @@ class MetronomeController extends _$MetronomeController {
       options: const SoundpoolOptions(streamType: StreamType.notification));
 
   MetronomeController() {
-    loadSounds();
+    loadSounds("assets/audio/click_up.wav", "assets/audio/click_down.wav");
   }
 
-  Future<void> loadSounds() async {
-    mainSound = await loadSound("assets/audio/pno_m.mp3");
-    subSound = await loadSound("assets/audio/pno_s.mp3");
+  Future<void> loadSounds(String mainSoundPath, String subSoundPath) async {
+    mainSound = await loadSound(mainSoundPath);
+    subSound = await loadSound(subSoundPath);
   }
 
   Future<int> loadSound(String path) async {
@@ -38,7 +38,7 @@ class MetronomeController extends _$MetronomeController {
       tempo: 100,
       signature: Signature(firstNumeral: 4, secondNumeral: 4),
       isActive: false,
-      sound: "Piano",
+      sound: "Click",
       beatCounter: 0);
 
   void toggle() {
@@ -145,6 +145,24 @@ class MetronomeController extends _$MetronomeController {
   }
 
   void selectSound(String sound) {
-    state = state.copyWith(sound: sound);
+    switch (sound) {
+      case "Click":
+        state = state.copyWith(sound: "Click");
+        loadSounds("assets/audio/click_up.wav", "assets/audio/click_down.wav");
+        break;
+      case "Piano":
+        state = state.copyWith(sound: "Piano");
+        loadSounds("assets/audio/piano_up.wav", "assets/audio/piano_down.wav");
+      case "Marimba":
+        state = state.copyWith(sound: "Marimba");
+        loadSounds(
+            "assets/audio/marimba_up.wav", "assets/audio/marimba_down.wav");
+      case "Synth":
+        state = state.copyWith(sound: "Synth");
+        loadSounds("assets/audio/synth_up.wav", "assets/audio/synth_down.wav");
+      default:
+        state = state.copyWith(sound: "Click");
+        loadSounds("assets/audio/click_up.wav", "assets/audio/click_down.wav");
+    }
   }
 }

@@ -17,10 +17,26 @@ class SoundSelectionWidget extends ConsumerWidget {
         child: Column(
       children: [
         SoundSelectionSoundButton(
+          name: "Click",
+          selected: sound == "Click" ? true : false,
+          onPressed: () {
+            ref.read(metronomeControllerProvider.notifier).selectSound("Click");
+          },
+        ),
+        SoundSelectionSoundButton(
           name: "Piano",
           selected: sound == "Piano" ? true : false,
           onPressed: () {
             ref.read(metronomeControllerProvider.notifier).selectSound("Piano");
+          },
+        ),
+        SoundSelectionSoundButton(
+          name: "Marimba",
+          selected: sound == "Marimba" ? true : false,
+          onPressed: () {
+            ref
+                .read(metronomeControllerProvider.notifier)
+                .selectSound("Marimba");
           },
         ),
         SoundSelectionSoundButton(

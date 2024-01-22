@@ -48,5 +48,13 @@ flutter:
     - assets/images/logo.png
     - assets/audio/pno_m.mp3
     - assets/audio/pno_s.mp3
+    - assets/audio/click_down.wav
+    - assets/audio/click_up.wav
+    - assets/audio/marimba_down.wav
+    - assets/audio/marimba_up.wav
+    - assets/audio/piano_down.wav
+    - assets/audio/piano_up.wav
+    - assets/audio/synth_down.wav
+    - assets/audio/synth_up.wav
 
 
