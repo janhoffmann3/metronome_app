@@ -22,7 +22,6 @@ Settings _$SettingsFromJson(Map<String, dynamic> json) {
 mixin _$Settings {
   int? get id => throw _privateConstructorUsedError;
   bool get hapticFeedback => throw _privateConstructorUsedError;
-  User get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,9 +34,7 @@ abstract class $SettingsCopyWith<$Res> {
   factory $SettingsCopyWith(Settings value, $Res Function(Settings) then) =
       _$SettingsCopyWithImpl<$Res, Settings>;
   @useResult
-  $Res call({int? id, bool hapticFeedback, User user});
-
-  $UserCopyWith<$Res> get user;
+  $Res call({int? id, bool hapticFeedback});
 }
 
 /// @nodoc
@@ -55,7 +52,6 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
   $Res call({
     Object? id = freezed,
     Object? hapticFeedback = null,
-    Object? user = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -66,19 +62,7 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
           ? _value.hapticFeedback
           : hapticFeedback // ignore: cast_nullable_to_non_nullable
               as bool,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value) as $Val);
-    });
   }
 }
 
@@ -90,10 +74,7 @@ abstract class _$$SettingsImplCopyWith<$Res>
       __$$SettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, bool hapticFeedback, User user});
-
-  @override
-  $UserCopyWith<$Res> get user;
+  $Res call({int? id, bool hapticFeedback});
 }
 
 /// @nodoc
@@ -109,7 +90,6 @@ class __$$SettingsImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? hapticFeedback = null,
-    Object? user = null,
   }) {
     return _then(_$SettingsImpl(
       id: freezed == id
@@ -120,10 +100,6 @@ class __$$SettingsImplCopyWithImpl<$Res>
           ? _value.hapticFeedback
           : hapticFeedback // ignore: cast_nullable_to_non_nullable
               as bool,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
     ));
   }
 }
@@ -132,8 +108,7 @@ class __$$SettingsImplCopyWithImpl<$Res>
 
 @JsonSerializable(includeIfNull: false)
 class _$SettingsImpl implements _Settings {
-  _$SettingsImpl(
-      {required this.id, required this.hapticFeedback, required this.user});
+  _$SettingsImpl({required this.id, required this.hapticFeedback});
 
   factory _$SettingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$SettingsImplFromJson(json);
@@ -142,12 +117,10 @@ class _$SettingsImpl implements _Settings {
   final int? id;
   @override
   final bool hapticFeedback;
-  @override
-  final User user;
 
   @override
   String toString() {
-    return 'Settings(id: $id, hapticFeedback: $hapticFeedback, user: $user)';
+    return 'Settings(id: $id, hapticFeedback: $hapticFeedback)';
   }
 
   @override
@@ -157,13 +130,12 @@ class _$SettingsImpl implements _Settings {
             other is _$SettingsImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.hapticFeedback, hapticFeedback) ||
-                other.hapticFeedback == hapticFeedback) &&
-            (identical(other.user, user) || other.user == user));
+                other.hapticFeedback == hapticFeedback));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, hapticFeedback, user);
+  int get hashCode => Object.hash(runtimeType, id, hapticFeedback);
 
   @JsonKey(ignore: true)
   @override
@@ -182,8 +154,7 @@ class _$SettingsImpl implements _Settings {
 abstract class _Settings implements Settings {
   factory _Settings(
       {required final int? id,
-      required final bool hapticFeedback,
-      required final User user}) = _$SettingsImpl;
+      required final bool hapticFeedback}) = _$SettingsImpl;
 
   factory _Settings.fromJson(Map<String, dynamic> json) =
       _$SettingsImpl.fromJson;
@@ -192,8 +163,6 @@ abstract class _Settings implements Settings {
   int? get id;
   @override
   bool get hapticFeedback;
-  @override
-  User get user;
   @override
   @JsonKey(ignore: true)
   _$$SettingsImplCopyWith<_$SettingsImpl> get copyWith =>

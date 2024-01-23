@@ -21,10 +21,9 @@ Favorite _$FavoriteFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Favorite {
   int? get id => throw _privateConstructorUsedError;
-  User get user => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get signature => throw _privateConstructorUsedError;
-  Sound get sound => throw _privateConstructorUsedError;
+  String get sound => throw _privateConstructorUsedError;
   int get tempo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,16 +37,7 @@ abstract class $FavoriteCopyWith<$Res> {
   factory $FavoriteCopyWith(Favorite value, $Res Function(Favorite) then) =
       _$FavoriteCopyWithImpl<$Res, Favorite>;
   @useResult
-  $Res call(
-      {int? id,
-      User user,
-      String name,
-      String signature,
-      Sound sound,
-      int tempo});
-
-  $UserCopyWith<$Res> get user;
-  $SoundCopyWith<$Res> get sound;
+  $Res call({int? id, String name, String signature, String sound, int tempo});
 }
 
 /// @nodoc
@@ -64,7 +54,6 @@ class _$FavoriteCopyWithImpl<$Res, $Val extends Favorite>
   @override
   $Res call({
     Object? id = freezed,
-    Object? user = null,
     Object? name = null,
     Object? signature = null,
     Object? sound = null,
@@ -75,10 +64,6 @@ class _$FavoriteCopyWithImpl<$Res, $Val extends Favorite>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -90,28 +75,12 @@ class _$FavoriteCopyWithImpl<$Res, $Val extends Favorite>
       sound: null == sound
           ? _value.sound
           : sound // ignore: cast_nullable_to_non_nullable
-              as Sound,
+              as String,
       tempo: null == tempo
           ? _value.tempo
           : tempo // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SoundCopyWith<$Res> get sound {
-    return $SoundCopyWith<$Res>(_value.sound, (value) {
-      return _then(_value.copyWith(sound: value) as $Val);
-    });
   }
 }
 
@@ -123,18 +92,7 @@ abstract class _$$FavoriteImplCopyWith<$Res>
       __$$FavoriteImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int? id,
-      User user,
-      String name,
-      String signature,
-      Sound sound,
-      int tempo});
-
-  @override
-  $UserCopyWith<$Res> get user;
-  @override
-  $SoundCopyWith<$Res> get sound;
+  $Res call({int? id, String name, String signature, String sound, int tempo});
 }
 
 /// @nodoc
@@ -149,7 +107,6 @@ class __$$FavoriteImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? user = null,
     Object? name = null,
     Object? signature = null,
     Object? sound = null,
@@ -160,10 +117,6 @@ class __$$FavoriteImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -175,7 +128,7 @@ class __$$FavoriteImplCopyWithImpl<$Res>
       sound: null == sound
           ? _value.sound
           : sound // ignore: cast_nullable_to_non_nullable
-              as Sound,
+              as String,
       tempo: null == tempo
           ? _value.tempo
           : tempo // ignore: cast_nullable_to_non_nullable
@@ -190,7 +143,6 @@ class __$$FavoriteImplCopyWithImpl<$Res>
 class _$FavoriteImpl implements _Favorite {
   _$FavoriteImpl(
       {required this.id,
-      required this.user,
       required this.name,
       required this.signature,
       required this.sound,
@@ -202,19 +154,17 @@ class _$FavoriteImpl implements _Favorite {
   @override
   final int? id;
   @override
-  final User user;
-  @override
   final String name;
   @override
   final String signature;
   @override
-  final Sound sound;
+  final String sound;
   @override
   final int tempo;
 
   @override
   String toString() {
-    return 'Favorite(id: $id, user: $user, name: $name, signature: $signature, sound: $sound, tempo: $tempo)';
+    return 'Favorite(id: $id, name: $name, signature: $signature, sound: $sound, tempo: $tempo)';
   }
 
   @override
@@ -223,7 +173,6 @@ class _$FavoriteImpl implements _Favorite {
         (other.runtimeType == runtimeType &&
             other is _$FavoriteImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.user, user) || other.user == user) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.signature, signature) ||
                 other.signature == signature) &&
@@ -234,7 +183,7 @@ class _$FavoriteImpl implements _Favorite {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, user, name, signature, sound, tempo);
+      Object.hash(runtimeType, id, name, signature, sound, tempo);
 
   @JsonKey(ignore: true)
   @override
@@ -253,10 +202,9 @@ class _$FavoriteImpl implements _Favorite {
 abstract class _Favorite implements Favorite {
   factory _Favorite(
       {required final int? id,
-      required final User user,
       required final String name,
       required final String signature,
-      required final Sound sound,
+      required final String sound,
       required final int tempo}) = _$FavoriteImpl;
 
   factory _Favorite.fromJson(Map<String, dynamic> json) =
@@ -265,13 +213,11 @@ abstract class _Favorite implements Favorite {
   @override
   int? get id;
   @override
-  User get user;
-  @override
   String get name;
   @override
   String get signature;
   @override
-  Sound get sound;
+  String get sound;
   @override
   int get tempo;
   @override

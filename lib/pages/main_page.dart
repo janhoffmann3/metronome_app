@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:metronome_app/models/favorite.dart';
 import 'package:metronome_app/resources/values/app_colors.dart';
 import 'package:metronome_app/resources/values/app_fonts.dart';
 import 'package:metronome_app/resources/values/app_sizes.dart';
 import 'package:metronome_app/state/metronome_controller.dart';
+import 'package:metronome_app/state/providers/user_provider.dart.dart';
 
-import '../state/auth_provider.dart';
 import '../widgets/drawer/drawer_menu_selection_button.dart';
 import '../widgets/main_page/main_page_bottom_menu_widget.dart';
 import '../widgets/main_page/main_page_display_widget.dart';
@@ -33,11 +34,13 @@ class MainPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final name = ref.watch(authProvider.select(
+    /* final name = ref.watch(authStateProvider.select(
       (value) => value.valueOrNull?.email,
-    ));
-
+    )); */
     final metronome = ref.watch(metronomeControllerProvider);
+
+    final user = ref.watch(userProvider);
+    final userNotifier = ref.watch(userProvider.notifier);
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -65,7 +68,15 @@ class MainPage extends ConsumerWidget {
           // User can add tempo, signature and sound to their favorites list via this button.
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                userNotifier.addFavorite(Favorite(
+                    id: null,
+                    name: "Favorite ${DateTime.now()}",
+                    signature:
+                        "${metronome.signature.firstNumeral}/${metronome.signature.secondNumeral}",
+                    sound: metronome.sound,
+                    tempo: metronome.tempo));
+              },
               icon:
                   const Icon(Icons.star_border, color: AppColors.secondary500),
               iconSize: AppSizes.iconSize,
@@ -97,10 +108,10 @@ class MainPage extends ConsumerWidget {
                               style: AppFonts.titleSmall,
                             ),
                             Text(
-                              name ?? "Not logged in",
+                              user?.name ?? "Not logged in",
                               style:
                                   AppFonts.displaySmall.copyWith(fontSize: 20),
-                            )
+                            ),
                           ],
                         )),
                   ],

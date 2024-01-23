@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:metronome_app/resources/values/app_colors.dart';
 import 'package:metronome_app/resources/values/app_fonts.dart';
+import 'package:metronome_app/state/providers/authentication_provider.dart';
+import 'package:metronome_app/state/providers/session_provider.dart';
 
 class LogInPage extends ConsumerWidget {
   const LogInPage({super.key});
@@ -15,6 +17,40 @@ class LogInPage extends ConsumerWidget {
     final formKey = GlobalKey<FormState>();
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
+
+    final auth = ref.watch(authenticationProvider);
+
+    void showErrorDialog(String error) {
+      showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+                title: const Text('Something went wrong'),
+                content: Text(error),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(ctx).pop();
+                      },
+                      child: const Text("OK"))
+                ],
+              ));
+    }
+
+    Future<void> signIn() async {
+      if (!formKey.currentState!.validate()) {
+        return;
+      }
+
+      try {
+        await auth
+            .signInWithEmailAndPassword(
+                emailController.text, passwordController.text)
+            .then((value) =>
+                ref.watch(sessionControllerProvider.notifier).startSession());
+      } on FirebaseAuthException catch (e) {
+        showErrorDialog(e.message.toString());
+      }
+    }
 
     return Scaffold(
       body: Container(
@@ -183,11 +219,7 @@ class LogInPage extends ConsumerWidget {
                   // The ElevatedButton is a child of the Container. It makes the button clickable.
                   child: ElevatedButton(
                     onPressed: () async {
-                      if (formKey.currentState!.validate()) {
-                        await FirebaseAuth.instance.signInWithEmailAndPassword(
-                            email: emailController.text,
-                            password: passwordController.text);
-                      }
+                      await signIn();
                     },
                     style: ElevatedButton.styleFrom(
                       elevation: 0,

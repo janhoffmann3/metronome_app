@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:metronome_app/models/user.dart';
 
 part 'settings.freezed.dart';
 part 'settings.g.dart';
@@ -10,7 +9,6 @@ class Settings with _$Settings {
   factory Settings({
     required int? id,
     required bool hapticFeedback,
-    required User user,
   }) = _Settings;
 
   factory Settings.fromJson(Map<String, dynamic> json) =>

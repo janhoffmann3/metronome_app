@@ -10,12 +10,12 @@ import 'package:metronome_app/pages/main_page.dart';
 import 'package:metronome_app/pages/settings/settings_page.dart';
 import 'package:metronome_app/pages/settings/settings_username_page.dart';
 
-import '../state/auth_provider.dart';
+import '../state/providers/authentication_provider.dart';
 
 final _key = GlobalKey<NavigatorState>();
 
 final appRouterProvider = Provider<GoRouter>((ref) {
-  final authState = ref.watch(authProvider);
+  final authState = ref.watch(authStateProvider);
 
   return GoRouter(
     navigatorKey: _key,

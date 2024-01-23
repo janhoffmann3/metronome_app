@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../resources/values/app_colors.dart';
 import '../../resources/values/app_fonts.dart';
-import '../../state/auth_provider.dart';
+import '../../state/providers/user_provider.dart.dart';
 
 class SettingsUsernamePage extends ConsumerWidget {
   const SettingsUsernamePage({super.key});
@@ -16,9 +16,14 @@ class SettingsUsernamePage extends ConsumerWidget {
     final formKey = GlobalKey<FormState>();
     final nameController = TextEditingController();
 
-    final name = ref.watch(authProvider.select(
-      (value) => value.valueOrNull?.email,
-    ));
+    final user = ref.watch(userProvider);
+    final userNotifier = ref.watch(userProvider.notifier);
+
+    Future<void> updateName() async {
+      if (formKey.currentState!.validate()) {
+        await userNotifier.updateName(nameController.text);
+      }
+    }
 
     return Scaffold(
       body: Container(
@@ -111,13 +116,11 @@ class SettingsUsernamePage extends ConsumerWidget {
                                   BorderRadius.all(Radius.circular(10)),
                               borderSide: BorderSide(
                                   color: AppColors.secondary500, width: 1)),
-                          hintText: name,
+                          hintText: user?.name,
                           hintStyle: AppFonts.bodyLarge.copyWith(
                               color: AppColors.secondary200.withOpacity(0.5))),
-                      onEditingComplete: () {
-                        if (formKey.currentState!.validate()) {
-                          // Change username
-                        }
+                      onEditingComplete: () async {
+                        await updateName();
                       },
                     ),
                   ),

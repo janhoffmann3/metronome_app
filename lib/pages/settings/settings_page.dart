@@ -1,12 +1,15 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:metronome_app/models/session.dart';
+import 'package:metronome_app/models/settings.dart';
+import 'package:metronome_app/state/providers/session_provider.dart';
+import 'package:metronome_app/state/providers/user_provider.dart.dart';
 
 import '../../resources/values/app_colors.dart';
 import '../../resources/values/app_fonts.dart';
-import '../../state/auth_provider.dart';
+import '../../state/providers/authentication_provider.dart';
 
 class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});
@@ -15,9 +18,10 @@ class SettingsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final name = ref.watch(authProvider.select(
-      (value) => value.valueOrNull?.email,
-    ));
+    final auth = ref.watch(authenticationProvider);
+
+    final user = ref.watch(userProvider);
+    final userNotifier = ref.watch(userProvider.notifier);
 
     return Scaffold(
       body: Container(
@@ -100,7 +104,7 @@ class SettingsPage extends ConsumerWidget {
                   ),
                   tileColor: AppColors.secondary700,
                   subtitle: Text(
-                    name ?? "Not logged in",
+                    user?.email ?? "Not logged in",
                     style: AppFonts.bodyMedium.copyWith(
                         color: AppColors.secondary200.withOpacity(0.6)),
                   ),
@@ -123,7 +127,7 @@ class SettingsPage extends ConsumerWidget {
                   ),
                   tileColor: AppColors.secondary700,
                   subtitle: Text(
-                    name ?? "Not logged in",
+                    user?.name ?? "Not logged in",
                     style: AppFonts.bodyMedium.copyWith(
                         color: AppColors.secondary200.withOpacity(0.6)),
                   ),
@@ -169,8 +173,11 @@ class SettingsPage extends ConsumerWidget {
                   ),
                   tileColor: AppColors.secondary700,
                   trailing: Switch(
-                    onChanged: (value) {},
-                    value: true,
+                    onChanged: (value) {
+                      userNotifier.updateSettings(
+                          Settings(id: null, hapticFeedback: value));
+                    },
+                    value: user!.settings!.hapticFeedback,
                     activeColor: AppColors.primary400,
                   ),
                 ),
@@ -198,7 +205,16 @@ class SettingsPage extends ConsumerWidget {
                       size: 15,
                     ),
                     onPressed: () {
-                      FirebaseAuth.instance.signOut();
+                      ref
+                          .watch(sessionControllerProvider.notifier)
+                          .endSession();
+                      userNotifier.addSession(Session(
+                          id: null,
+                          startTime:
+                              ref.read(sessionControllerProvider)?.startTime,
+                          endTime:
+                              ref.read(sessionControllerProvider)?.endTime));
+                      auth.signOut();
                     },
                   ),
                 ),

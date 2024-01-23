@@ -7,7 +7,7 @@ part of 'metronome_controller.dart';
 // **************************************************************************
 
 String _$metronomeControllerHash() =>
-    r'9c8182891983e4dd904b30ad257024de2fbe42f1';
+    r'60b1cbabd6ef7e1481fd5be773da695ec34521f8';
 
 /// See also [MetronomeController].
 @ProviderFor(MetronomeController)

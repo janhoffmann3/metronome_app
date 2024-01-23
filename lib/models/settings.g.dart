@@ -10,7 +10,6 @@ _$SettingsImpl _$$SettingsImplFromJson(Map<String, dynamic> json) =>
     _$SettingsImpl(
       id: json['id'] as int?,
       hapticFeedback: json['hapticFeedback'] as bool,
-      user: User.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$SettingsImplToJson(_$SettingsImpl instance) {
@@ -24,6 +23,5 @@ Map<String, dynamic> _$$SettingsImplToJson(_$SettingsImpl instance) {
 
   writeNotNull('id', instance.id);
   val['hapticFeedback'] = instance.hapticFeedback;
-  val['user'] = instance.user;
   return val;
 }

@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../resources/values/app_colors.dart';
 import '../../resources/values/app_fonts.dart';
+import '../../state/metronome_controller.dart';
+import '../../state/providers/user_provider.dart.dart';
 import '../../widgets/favorites_page/favorites_tile_widget.dart';
 
 class FavoritesPage extends ConsumerWidget {
@@ -13,6 +15,9 @@ class FavoritesPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(userProvider);
+    final userNotifier = ref.watch(userProvider.notifier);
+
     return Scaffold(
       body: Container(
           decoration: const BoxDecoration(
@@ -67,15 +72,25 @@ class FavoritesPage extends ConsumerWidget {
               ),
               Expanded(
                 child: ListView(
-                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                  children: const <Widget>[
-                    FavoritesTileWidget(
-                        bpm: "140",
-                        name: "Favorite #1",
-                        signature: "4/4",
-                        sound: "Piano"),
-                  ],
-                ),
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    children: user!.favorites!
+                        .map((favorite) => FavoritesTileWidget(
+                            onRemove: () {
+                              userNotifier.removeFavorite(favorite.id!);
+                            },
+                            onTap: () {
+                              ref
+                                  .watch(metronomeControllerProvider.notifier)
+                                  .setMetronome(favorite.tempo,
+                                      favorite.signature, favorite.sound);
+
+                              context.go("/");
+                            },
+                            name: favorite.name,
+                            bpm: favorite.tempo.toString(),
+                            signature: favorite.signature,
+                            sound: favorite.sound))
+                        .toList()),
               ),
               const SizedBox(
                 height: 100,

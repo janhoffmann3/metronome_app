@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:metronome_app/resources/values/app_colors.dart';
 import 'package:metronome_app/resources/values/app_fonts.dart';
+import 'package:metronome_app/state/providers/authentication_provider.dart';
 
 class AuthPage extends ConsumerWidget {
   const AuthPage({super.key});
@@ -12,6 +14,32 @@ class AuthPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final auth = ref.watch(authenticationProvider);
+
+    void showErrorDialog(String error) {
+      showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+                title: const Text('Something went wrong'),
+                content: Text(error),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(ctx).pop();
+                      },
+                      child: const Text("OK"))
+                ],
+              ));
+    }
+
+    Future<void> signInWithGoogle() async {
+      try {
+        await auth.signInWithGoogle();
+      } on FirebaseAuthException catch (e) {
+        showErrorDialog(e.message.toString());
+      }
+    }
+
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -69,8 +97,8 @@ class AuthPage extends ConsumerWidget {
 
                 // The ElevatedButton is a child of the Container. It makes the button clickable.
                 child: ElevatedButton(
-                  onPressed: () {
-                    context.go("/");
+                  onPressed: () async {
+                    await signInWithGoogle();
                   },
                   style: ElevatedButton.styleFrom(
                     elevation: 0,

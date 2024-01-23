@@ -9,10 +9,9 @@ part of 'favorite.dart';
 _$FavoriteImpl _$$FavoriteImplFromJson(Map<String, dynamic> json) =>
     _$FavoriteImpl(
       id: json['id'] as int?,
-      user: User.fromJson(json['user'] as Map<String, dynamic>),
       name: json['name'] as String,
       signature: json['signature'] as String,
-      sound: Sound.fromJson(json['sound'] as Map<String, dynamic>),
+      sound: json['sound'] as String,
       tempo: json['tempo'] as int,
     );
 
@@ -26,7 +25,6 @@ Map<String, dynamic> _$$FavoriteImplToJson(_$FavoriteImpl instance) {
   }
 
   writeNotNull('id', instance.id);
-  val['user'] = instance.user;
   val['name'] = instance.name;
   val['signature'] = instance.signature;
   val['sound'] = instance.sound;

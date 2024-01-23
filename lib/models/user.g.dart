@@ -8,8 +8,8 @@ part of 'user.dart';
 
 _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       id: json['id'] as int?,
-      username: json['username'] as String,
-      email: json['email'] as String,
+      name: json['name'] as String?,
+      email: json['email'] as String?,
       favorites: (json['favorites'] as List<dynamic>?)
           ?.map((e) => Favorite.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -28,8 +28,8 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) {
   }
 
   writeNotNull('id', instance.id);
-  val['username'] = instance.username;
-  val['email'] = instance.email;
+  writeNotNull('name', instance.name);
+  writeNotNull('email', instance.email);
   writeNotNull('favorites', instance.favorites);
   writeNotNull('settings', instance.settings);
   return val;

@@ -10,27 +10,17 @@ part 'metronome_controller.g.dart';
 
 @riverpod
 class MetronomeController extends _$MetronomeController {
-  int beatCounter = 0;
-  int? mainSound;
-  int? subSound;
-  DateTime? lastTap;
-  StreamSubscription? tickerSubscription;
-  Soundpool pool = Soundpool.fromOptions(
+  int _beatCounter = 0;
+  int? _mainSound;
+  int? _subSound;
+  DateTime? _lastTap;
+  StreamSubscription? _tickerSubscription;
+
+  final Soundpool _pool = Soundpool.fromOptions(
       options: const SoundpoolOptions(streamType: StreamType.notification));
 
   MetronomeController() {
     loadSounds("assets/audio/click_up.wav", "assets/audio/click_down.wav");
-  }
-
-  Future<void> loadSounds(String mainSoundPath, String subSoundPath) async {
-    mainSound = await loadSound(mainSoundPath);
-    subSound = await loadSound(subSoundPath);
-  }
-
-  Future<int> loadSound(String path) async {
-    return await rootBundle.load(path).then((ByteData soundData) {
-      return pool.load(soundData);
-    });
   }
 
   @override
@@ -41,31 +31,54 @@ class MetronomeController extends _$MetronomeController {
       sound: "Click",
       beatCounter: 0);
 
+  Future<void> loadSounds(String mainSoundPath, String subSoundPath) async {
+    _mainSound = await loadSound(mainSoundPath);
+    _subSound = await loadSound(subSoundPath);
+  }
+
+  Future<int> loadSound(String path) async {
+    return await rootBundle.load(path).then((ByteData soundData) {
+      return _pool.load(soundData);
+    });
+  }
+
+  void setMetronome(int tempo, String signature, String sound) {
+    String signature = "4/4";
+    List<String> parts = signature.split('/');
+    int firstNumeral = int.parse(parts[0]);
+    int secondNumeral = int.parse(parts[1]);
+
+    Signature sig =
+        Signature(firstNumeral: firstNumeral, secondNumeral: secondNumeral);
+    state = state.copyWith(tempo: tempo, signature: sig, sound: sound);
+    resync();
+  }
+
   void toggle() {
     if (state.isActive == false) {
       state = state.copyWith(isActive: true);
       resync();
     } else if (state.isActive == true) {
-      tickerSubscription?.cancel();
+      _tickerSubscription?.cancel();
       state = state.copyWith(isActive: false);
     }
   }
 
   void tick() {
-    if (beatCounter % state.signature.firstNumeral == 0 || beatCounter == 0) {
-      pool.play(mainSound!);
+    if (_beatCounter % state.signature.firstNumeral == 0 || _beatCounter == 0) {
+      _pool.play(_mainSound!);
     } else {
-      pool.play(subSound!);
+      _pool.play(_subSound!);
     }
-    state = state.copyWith(beatCounter: beatCounter);
-    beatCounter++;
+    state = state.copyWith(beatCounter: _beatCounter);
+    _beatCounter++;
   }
 
   void resync() {
     if (state.isActive == true) {
-      tickerSubscription?.cancel();
-      beatCounter = 0;
-      tickerSubscription = Stream.periodic(
+      _tickerSubscription?.cancel();
+      _beatCounter = 0;
+      _tickerSubscription = Stream.periodic(
         Duration(
           milliseconds:
               ((60000 ~/ state.tempo * (4 / state.signature.secondNumeral)))
@@ -96,12 +109,18 @@ class MetronomeController extends _$MetronomeController {
 
   void onTapTempo() {
     final now = DateTime.now();
-    if (lastTap != null) {
-      final difference = now.difference(lastTap!).inMilliseconds;
+    if (_lastTap != null) {
+      final difference = now.difference(_lastTap!).inMilliseconds;
       final bpm = 60000 / difference;
-      state = state.copyWith(tempo: bpm.round());
+      if (bpm > 250) {
+        state = state.copyWith(tempo: 250);
+      } else if (bpm < 30) {
+        state = state.copyWith(tempo: 30);
+      } else {
+        state = state.copyWith(tempo: bpm.round());
+      }
     }
-    lastTap = now;
+    _lastTap = now;
   }
 
   void updateFirstNumeral(int delta) {

@@ -21,8 +21,8 @@ User _$UserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$User {
   int? get id => throw _privateConstructorUsedError;
-  String get username => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
   List<Favorite>? get favorites => throw _privateConstructorUsedError;
   Settings? get settings => throw _privateConstructorUsedError;
 
@@ -38,8 +38,8 @@ abstract class $UserCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
-      String username,
-      String email,
+      String? name,
+      String? email,
       List<Favorite>? favorites,
       Settings? settings});
 
@@ -60,8 +60,8 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @override
   $Res call({
     Object? id = freezed,
-    Object? username = null,
-    Object? email = null,
+    Object? name = freezed,
+    Object? email = freezed,
     Object? favorites = freezed,
     Object? settings = freezed,
   }) {
@@ -70,14 +70,14 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       favorites: freezed == favorites
           ? _value.favorites
           : favorites // ignore: cast_nullable_to_non_nullable
@@ -111,8 +111,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
-      String username,
-      String email,
+      String? name,
+      String? email,
       List<Favorite>? favorites,
       Settings? settings});
 
@@ -131,8 +131,8 @@ class __$$UserImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? username = null,
-    Object? email = null,
+    Object? name = freezed,
+    Object? email = freezed,
     Object? favorites = freezed,
     Object? settings = freezed,
   }) {
@@ -141,14 +141,14 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       favorites: freezed == favorites
           ? _value._favorites
           : favorites // ignore: cast_nullable_to_non_nullable
@@ -167,7 +167,7 @@ class __$$UserImplCopyWithImpl<$Res>
 class _$UserImpl implements _User {
   const _$UserImpl(
       {required this.id,
-      required this.username,
+      required this.name,
       required this.email,
       required final List<Favorite>? favorites,
       required this.settings})
@@ -179,9 +179,9 @@ class _$UserImpl implements _User {
   @override
   final int? id;
   @override
-  final String username;
+  final String? name;
   @override
-  final String email;
+  final String? email;
   final List<Favorite>? _favorites;
   @override
   List<Favorite>? get favorites {
@@ -197,7 +197,7 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, email: $email, favorites: $favorites, settings: $settings)';
+    return 'User(id: $id, name: $name, email: $email, favorites: $favorites, settings: $settings)';
   }
 
   @override
@@ -206,8 +206,7 @@ class _$UserImpl implements _User {
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.username, username) ||
-                other.username == username) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
             const DeepCollectionEquality()
                 .equals(other._favorites, _favorites) &&
@@ -217,7 +216,7 @@ class _$UserImpl implements _User {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, username, email,
+  int get hashCode => Object.hash(runtimeType, id, name, email,
       const DeepCollectionEquality().hash(_favorites), settings);
 
   @JsonKey(ignore: true)
@@ -237,8 +236,8 @@ class _$UserImpl implements _User {
 abstract class _User implements User {
   const factory _User(
       {required final int? id,
-      required final String username,
-      required final String email,
+      required final String? name,
+      required final String? email,
       required final List<Favorite>? favorites,
       required final Settings? settings}) = _$UserImpl;
 
@@ -247,9 +246,9 @@ abstract class _User implements User {
   @override
   int? get id;
   @override
-  String get username;
+  String? get name;
   @override
-  String get email;
+  String? get email;
   @override
   List<Favorite>? get favorites;
   @override

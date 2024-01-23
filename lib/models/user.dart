@@ -10,8 +10,8 @@ class User with _$User {
   @JsonSerializable(includeIfNull: false)
   const factory User({
     required int? id,
-    required String username,
-    required String email,
+    required String? name,
+    required String? email,
     required List<Favorite>? favorites,
     required Settings? settings,
   }) = _User;
