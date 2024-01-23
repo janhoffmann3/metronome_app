@@ -44,7 +44,7 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAyLQiH9j4MZ-v_bMs9m3Ew2WT0-L2xZMU',
+    apiKey: '<API_KEY>',
     appId: '1:522332906905:web:9606d4ea61127831449f08',
     messagingSenderId: '522332906905',
     projectId: 'metronome-app-f8d87',
@@ -53,7 +53,7 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA5aEN24zuq_wu928PVUTjYaLEMfhWNzs0',
+    apiKey: '<API_KEY>',
     appId: '1:522332906905:android:082b57050d4ef7d7449f08',
     messagingSenderId: '522332906905',
     projectId: 'metronome-app-f8d87',
@@ -61,7 +61,7 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDh8HMwHoQ-qQtsc62_QViYSHF4jn48dY4',
+    apiKey: '<API_KEY>',
     appId: '1:522332906905:ios:0a62658e28293404449f08',
     messagingSenderId: '522332906905',
     projectId: 'metronome-app-f8d87',
@@ -70,7 +70,7 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDh8HMwHoQ-qQtsc62_QViYSHF4jn48dY4',
+    apiKey: '<API_KEY>',
     appId: '1:522332906905:ios:986612e9f7f39926449f08',
     messagingSenderId: '522332906905',
     projectId: 'metronome-app-f8d87',
