@@ -7,6 +7,11 @@ import 'package:metronome_app/state/providers/authentication_provider.dart';
 import '../models/user.dart';
 import '../services/user_service.dart';
 
+/// ###UserNotifier class
+///
+/// Manages user's state
+///
+///
 class UserNotifier extends StateNotifier<User?> {
   final UserService userService;
   final Ref ref;
@@ -15,6 +20,7 @@ class UserNotifier extends StateNotifier<User?> {
     syncUser();
   }
 
+  // Create new user by calling userService
   Future<void> createUser(String email, String name) async {
     try {
       User user = await userService.createUser(email, name);
@@ -24,6 +30,9 @@ class UserNotifier extends StateNotifier<User?> {
     }
   }
 
+  // Sync user - get current Firebase user's email and get the user by it from databse
+  // Save user to state
+  // Syncs Firebase user with MySQL user
   Future<void> syncUser() async {
     try {
       var email = ref
@@ -37,6 +46,7 @@ class UserNotifier extends StateNotifier<User?> {
     }
   }
 
+  // Update user's name
   Future<void> updateName(String name) async {
     try {
       if (state?.id != null) {
@@ -51,6 +61,7 @@ class UserNotifier extends StateNotifier<User?> {
     }
   }
 
+  // Update user's settings
   Future<void> updateSettings(Settings settings) async {
     try {
       if (state?.id != null) {
@@ -65,6 +76,7 @@ class UserNotifier extends StateNotifier<User?> {
     }
   }
 
+  // Add new favorite for current user
   Future<void> addFavorite(Favorite favorite) async {
     try {
       if (state?.id != null) {
@@ -79,6 +91,7 @@ class UserNotifier extends StateNotifier<User?> {
     }
   }
 
+  // Remove favorite from current user
   Future<void> removeFavorite(int favoriteId) async {
     try {
       if (state?.id != null) {
@@ -93,6 +106,7 @@ class UserNotifier extends StateNotifier<User?> {
     }
   }
 
+  // Add new session for current user
   Future<void> addSession(Session session) async {
     try {
       if (state?.id != null) {

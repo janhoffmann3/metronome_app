@@ -7,6 +7,11 @@ import 'package:metronome_app/resources/values/app_fonts.dart';
 import 'package:metronome_app/state/providers/authentication_provider.dart';
 import 'package:metronome_app/state/providers/session_provider.dart';
 
+/// ### Login page
+///
+///  Users can log in with their email and password via this page
+///
+///
 class LogInPage extends ConsumerWidget {
   const LogInPage({super.key});
   static String get routeName => 'login';
@@ -14,12 +19,18 @@ class LogInPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Global key of the form
     final formKey = GlobalKey<FormState>();
+
+    // Controllers attached to form fields
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
 
+    // RiverPod
     final auth = ref.watch(authenticationProvider);
+    final sessionNotifier = ref.watch(sessionControllerProvider.notifier);
 
+    // Shows error dialog when Firebase app returns an error
     void showErrorDialog(String error) {
       showDialog(
           context: context,
@@ -36,7 +47,10 @@ class LogInPage extends ConsumerWidget {
               ));
     }
 
+    // Calls auth provider method to sign in with email and password
+    // then it initiates the session using session notifier
     Future<void> signIn() async {
+      // Validates the form
       if (!formKey.currentState!.validate()) {
         return;
       }
@@ -45,8 +59,7 @@ class LogInPage extends ConsumerWidget {
         await auth
             .signInWithEmailAndPassword(
                 emailController.text, passwordController.text)
-            .then((value) =>
-                ref.watch(sessionControllerProvider.notifier).startSession());
+            .then((value) => sessionNotifier.startSession());
       } on FirebaseAuthException catch (e) {
         showErrorDialog(e.message.toString());
       }

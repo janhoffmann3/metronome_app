@@ -11,5 +11,7 @@ class Metronome with _$Metronome {
     required bool isActive,
     required String sound,
     required int beatCounter,
+    required bool favorited,
+    required bool? haptic,
   }) = _Metronome;
 }

@@ -6,7 +6,7 @@ import '../../resources/values/app_colors.dart';
 /// This widget graphically shows user the current beat.
 /// When the beat changes, the specific container's background color changes with it.
 ///
-
+///
 class MainPageTickerWidget extends StatelessWidget {
   final int currentBeat;
   final int totalBeats;
@@ -47,7 +47,7 @@ class MainPageTickerWidget extends StatelessWidget {
         width: 13,
         height: 13,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
             color: dotColor));
   }
 }

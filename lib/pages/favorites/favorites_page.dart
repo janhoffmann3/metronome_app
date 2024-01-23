@@ -8,6 +8,11 @@ import '../../state/metronome_controller.dart';
 import '../../state/providers/user_provider.dart.dart';
 import '../../widgets/favorites_page/favorites_tile_widget.dart';
 
+/// ### Favorites page
+///
+///  Page that displays user's favorites via mapping [FavoritesTileWidget]
+///
+///
 class FavoritesPage extends ConsumerWidget {
   const FavoritesPage({super.key});
   static String get routeName => 'favorites';
@@ -15,8 +20,30 @@ class FavoritesPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Riverpod
     final user = ref.watch(userProvider);
     final userNotifier = ref.watch(userProvider.notifier);
+    final metronomeNotifier = ref.watch(metronomeControllerProvider.notifier);
+
+    // Maps favorites to FavoritesTileWidget assigning data from database calling user notifier
+    List<FavoritesTileWidget> mapFavorites() {
+      return user!.favorites!
+          .map((favorite) => FavoritesTileWidget(
+              onRemove: () async {
+                await userNotifier.removeFavorite(favorite.id!);
+              },
+              onTap: () {
+                metronomeNotifier.setMetronome(
+                    favorite.tempo, favorite.signature, favorite.sound, true);
+
+                context.go("/");
+              },
+              name: favorite.name,
+              bpm: favorite.tempo.toString(),
+              signature: favorite.signature,
+              sound: favorite.sound))
+          .toList();
+    }
 
     return Scaffold(
       body: Container(
@@ -73,24 +100,7 @@ class FavoritesPage extends ConsumerWidget {
               Expanded(
                 child: ListView(
                     padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    children: user!.favorites!
-                        .map((favorite) => FavoritesTileWidget(
-                            onRemove: () {
-                              userNotifier.removeFavorite(favorite.id!);
-                            },
-                            onTap: () {
-                              ref
-                                  .watch(metronomeControllerProvider.notifier)
-                                  .setMetronome(favorite.tempo,
-                                      favorite.signature, favorite.sound);
-
-                              context.go("/");
-                            },
-                            name: favorite.name,
-                            bpm: favorite.tempo.toString(),
-                            signature: favorite.signature,
-                            sound: favorite.sound))
-                        .toList()),
+                    children: mapFavorites()),
               ),
               const SizedBox(
                 height: 100,

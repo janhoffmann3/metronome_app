@@ -4,6 +4,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../resources/values/app_colors.dart';
 import '../../resources/values/app_fonts.dart';
 
+/// ### Favorites tile widget
+///
+/// Represents favorite in a favorites list
+///
+///
 class FavoritesTileWidget extends StatelessWidget {
   final String name;
   final String bpm;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:metronome_app/state/providers/user_provider.dart.dart';
 
 import '../../resources/values/app_colors.dart';
 import '../../state/metronome_controller.dart';
@@ -16,6 +17,8 @@ class BottomMenuPlayButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     bool isActive = ref.watch(metronomeControllerProvider).isActive;
+    final metronomeNotifier = ref.watch(metronomeControllerProvider.notifier);
+    final user = ref.watch(userProvider);
     IconData iconData = isActive ? Icons.stop : Icons.play_arrow;
 
     return Container(
@@ -25,7 +28,8 @@ class BottomMenuPlayButton extends ConsumerWidget {
         child: FloatingActionButton(
             heroTag: null,
             onPressed: () {
-              ref.watch(metronomeControllerProvider.notifier).toggle();
+              metronomeNotifier.toggle();
+              metronomeNotifier.setHaptic(user!.settings!.hapticFeedback);
             },
             backgroundColor: AppColors.primary400,
             child: Icon(iconData, size: 50, color: AppColors.secondary900)));

@@ -9,7 +9,7 @@ import '../bottom_menu/bottom_menu_sound_selection_button.dart';
 /// This widget contains (from the left) sound design button, play/pause button and signature button.
 /// Buttons -  [BottomMenuPlayButton], [BottomMenuSoundSelectionButton], and [BottomMenuSignatureSelectionButton] are widgets.
 ///
-
+///
 class MainPageBottomMenuWidget extends StatelessWidget {
   const MainPageBottomMenuWidget({
     super.key,

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:metronome_app/models/favorite.dart';
 import 'package:metronome_app/resources/values/app_colors.dart';
 import 'package:metronome_app/resources/values/app_fonts.dart';
 import 'package:metronome_app/resources/values/app_sizes.dart';
+import 'package:metronome_app/resources/helpers/app_tempo_transcription.dart';
 import 'package:metronome_app/state/metronome_controller.dart';
 import 'package:metronome_app/state/providers/user_provider.dart.dart';
 
@@ -34,13 +36,32 @@ class MainPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    /* final name = ref.watch(authStateProvider.select(
-      (value) => value.valueOrNull?.email,
-    )); */
+    // RiverPod
     final metronome = ref.watch(metronomeControllerProvider);
-
+    final metronomeNotifier = ref.watch(metronomeControllerProvider.notifier);
     final user = ref.watch(userProvider);
     final userNotifier = ref.watch(userProvider.notifier);
+
+    // Adds new favorite for current user
+    Future<void> addFavorite() async {
+      // Sets the date suffix
+      DateTime now = DateTime.now();
+      DateTime date = DateTime(now.year, now.month, now.day);
+      String formattedDate = date.toString().substring(0, 10);
+
+      // Favorites the current set-up
+      metronomeNotifier.favorite();
+
+      // Adds new favorite to database
+      await userNotifier.addFavorite(Favorite(
+          id: null,
+          name:
+              "${TempoTranscription().getTranscription(metronome.tempo)} $formattedDate",
+          signature:
+              "${metronome.signature.firstNumeral}/${metronome.signature.secondNumeral}",
+          sound: metronome.sound,
+          tempo: metronome.tempo));
+    }
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -68,17 +89,14 @@ class MainPage extends ConsumerWidget {
           // User can add tempo, signature and sound to their favorites list via this button.
           actions: [
             IconButton(
-              onPressed: () {
-                userNotifier.addFavorite(Favorite(
-                    id: null,
-                    name: "Favorite ${DateTime.now()}",
-                    signature:
-                        "${metronome.signature.firstNumeral}/${metronome.signature.secondNumeral}",
-                    sound: metronome.sound,
-                    tempo: metronome.tempo));
+              onPressed: () async {
+                await addFavorite();
               },
-              icon:
-                  const Icon(Icons.star_border, color: AppColors.secondary500),
+              icon: Icon(
+                  metronome.favorited == true
+                      ? FontAwesomeIcons.solidStar
+                      : FontAwesomeIcons.star,
+                  color: AppColors.secondary500),
               iconSize: AppSizes.iconSize,
             )
           ]),

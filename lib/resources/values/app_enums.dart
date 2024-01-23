@@ -1,1 +1,0 @@
-enum SoundSelectionButtonState { selected, notSelected }

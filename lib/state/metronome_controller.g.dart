@@ -7,9 +7,17 @@ part of 'metronome_controller.dart';
 // **************************************************************************
 
 String _$metronomeControllerHash() =>
-    r'60b1cbabd6ef7e1481fd5be773da695ec34521f8';
+    r'ac40f5b85776c2755cdd8e9fe6f0e698d1dfc143';
 
-/// See also [MetronomeController].
+/// ###MetronomeController
+///
+/// Manages app internal metronome
+/// Loads sounds to cache
+/// Updates metronome state
+///
+///
+///
+/// Copied from [MetronomeController].
 @ProviderFor(MetronomeController)
 final metronomeControllerProvider =
     AutoDisposeNotifierProvider<MetronomeController, Metronome>.internal(

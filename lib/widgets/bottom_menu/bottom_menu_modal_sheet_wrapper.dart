@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import '../../resources/values/app_colors.dart';
 import '../../resources/values/app_fonts.dart';
 
+/// ### Bottom menu modal sheet wrapper
+///
+/// Manages the modal
+///
 class BottomMenuModalSheetWrapper extends StatelessWidget {
   /// How much space in % will the bottom modal take (0.45 and 0.75)
   final double height;

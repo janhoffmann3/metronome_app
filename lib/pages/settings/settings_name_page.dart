@@ -6,19 +6,29 @@ import '../../resources/values/app_colors.dart';
 import '../../resources/values/app_fonts.dart';
 import '../../state/providers/user_provider.dart.dart';
 
-class SettingsUsernamePage extends ConsumerWidget {
-  const SettingsUsernamePage({super.key});
+/// ### Settings name page
+///
+/// Page where user can edit their name
+///
+///
+class SettingsNamePage extends ConsumerWidget {
+  const SettingsNamePage({super.key});
   static String get routeName => 'username-edit';
   static String get routeLocation => '/settings/$routeName';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Global form key
     final formKey = GlobalKey<FormState>();
+
+    // Controller attached to text field in form
     final nameController = TextEditingController();
 
+    // RiverPod
     final user = ref.watch(userProvider);
     final userNotifier = ref.watch(userProvider.notifier);
 
+    // Updates user's name
     Future<void> updateName() async {
       if (formKey.currentState!.validate()) {
         await userNotifier.updateName(nameController.text);

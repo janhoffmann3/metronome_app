@@ -9,7 +9,7 @@ import '../../resources/values/app_fonts.dart';
 ///
 /// User can manually tap the tempo using this button.
 ///
-
+///
 class MainPageTapMeButton extends ConsumerWidget {
   const MainPageTapMeButton({
     super.key,

@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:metronome_app/resources/values/app_colors.dart';
 
+/// ### AppFonts class
+///
+/// Stores all fonts used in the app
+///
+///
 class AppFonts {
   static TextStyle regular = GoogleFonts.inter(
       fontSize: 14,

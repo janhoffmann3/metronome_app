@@ -21,6 +21,8 @@ mixin _$Metronome {
   bool get isActive => throw _privateConstructorUsedError;
   String get sound => throw _privateConstructorUsedError;
   int get beatCounter => throw _privateConstructorUsedError;
+  bool get favorited => throw _privateConstructorUsedError;
+  bool? get haptic => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MetronomeCopyWith<Metronome> get copyWith =>
@@ -37,7 +39,9 @@ abstract class $MetronomeCopyWith<$Res> {
       Signature signature,
       bool isActive,
       String sound,
-      int beatCounter});
+      int beatCounter,
+      bool favorited,
+      bool? haptic});
 
   $SignatureCopyWith<$Res> get signature;
 }
@@ -60,6 +64,8 @@ class _$MetronomeCopyWithImpl<$Res, $Val extends Metronome>
     Object? isActive = null,
     Object? sound = null,
     Object? beatCounter = null,
+    Object? favorited = null,
+    Object? haptic = freezed,
   }) {
     return _then(_value.copyWith(
       tempo: null == tempo
@@ -82,6 +88,14 @@ class _$MetronomeCopyWithImpl<$Res, $Val extends Metronome>
           ? _value.beatCounter
           : beatCounter // ignore: cast_nullable_to_non_nullable
               as int,
+      favorited: null == favorited
+          ? _value.favorited
+          : favorited // ignore: cast_nullable_to_non_nullable
+              as bool,
+      haptic: freezed == haptic
+          ? _value.haptic
+          : haptic // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 
@@ -107,7 +121,9 @@ abstract class _$$MetronomeImplCopyWith<$Res>
       Signature signature,
       bool isActive,
       String sound,
-      int beatCounter});
+      int beatCounter,
+      bool favorited,
+      bool? haptic});
 
   @override
   $SignatureCopyWith<$Res> get signature;
@@ -129,6 +145,8 @@ class __$$MetronomeImplCopyWithImpl<$Res>
     Object? isActive = null,
     Object? sound = null,
     Object? beatCounter = null,
+    Object? favorited = null,
+    Object? haptic = freezed,
   }) {
     return _then(_$MetronomeImpl(
       tempo: null == tempo
@@ -151,6 +169,14 @@ class __$$MetronomeImplCopyWithImpl<$Res>
           ? _value.beatCounter
           : beatCounter // ignore: cast_nullable_to_non_nullable
               as int,
+      favorited: null == favorited
+          ? _value.favorited
+          : favorited // ignore: cast_nullable_to_non_nullable
+              as bool,
+      haptic: freezed == haptic
+          ? _value.haptic
+          : haptic // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -163,7 +189,9 @@ class _$MetronomeImpl implements _Metronome {
       required this.signature,
       required this.isActive,
       required this.sound,
-      required this.beatCounter});
+      required this.beatCounter,
+      required this.favorited,
+      required this.haptic});
 
   @override
   final int tempo;
@@ -175,10 +203,14 @@ class _$MetronomeImpl implements _Metronome {
   final String sound;
   @override
   final int beatCounter;
+  @override
+  final bool favorited;
+  @override
+  final bool? haptic;
 
   @override
   String toString() {
-    return 'Metronome(tempo: $tempo, signature: $signature, isActive: $isActive, sound: $sound, beatCounter: $beatCounter)';
+    return 'Metronome(tempo: $tempo, signature: $signature, isActive: $isActive, sound: $sound, beatCounter: $beatCounter, favorited: $favorited, haptic: $haptic)';
   }
 
   @override
@@ -193,12 +225,15 @@ class _$MetronomeImpl implements _Metronome {
                 other.isActive == isActive) &&
             (identical(other.sound, sound) || other.sound == sound) &&
             (identical(other.beatCounter, beatCounter) ||
-                other.beatCounter == beatCounter));
+                other.beatCounter == beatCounter) &&
+            (identical(other.favorited, favorited) ||
+                other.favorited == favorited) &&
+            (identical(other.haptic, haptic) || other.haptic == haptic));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, tempo, signature, isActive, sound, beatCounter);
+  int get hashCode => Object.hash(runtimeType, tempo, signature, isActive,
+      sound, beatCounter, favorited, haptic);
 
   @JsonKey(ignore: true)
   @override
@@ -213,7 +248,9 @@ abstract class _Metronome implements Metronome {
       required final Signature signature,
       required final bool isActive,
       required final String sound,
-      required final int beatCounter}) = _$MetronomeImpl;
+      required final int beatCounter,
+      required final bool favorited,
+      required final bool? haptic}) = _$MetronomeImpl;
 
   @override
   int get tempo;
@@ -225,6 +262,10 @@ abstract class _Metronome implements Metronome {
   String get sound;
   @override
   int get beatCounter;
+  @override
+  bool get favorited;
+  @override
+  bool? get haptic;
   @override
   @JsonKey(ignore: true)
   _$$MetronomeImplCopyWith<_$MetronomeImpl> get copyWith =>

@@ -4,6 +4,11 @@ import 'package:go_router/go_router.dart';
 import '../../resources/values/app_colors.dart';
 import '../../resources/values/app_fonts.dart';
 
+/// ### About page
+///
+///  It contains general description of the project
+///
+///
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
   static String get routeName => 'about';

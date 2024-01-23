@@ -9,7 +9,7 @@ import '../../state/metronome_controller.dart';
 ///
 /// Just a basic slider for setting the tempo.
 ///
-
+///
 class MainPageTempoSlider extends ConsumerWidget {
   const MainPageTempoSlider({
     super.key,

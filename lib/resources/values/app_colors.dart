@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+/// ### AppColors class
+///
+/// Stores all colors used in the app
+///
+///
 class AppColors {
   //Primary
   static const Color primary900 = Color(0xFF130928);

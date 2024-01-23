@@ -4,10 +4,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:metronome_app/resources/values/app_colors.dart';
 import 'package:metronome_app/resources/values/app_fonts.dart';
+import 'package:metronome_app/resources/helpers/app_random_names.dart';
 import 'package:metronome_app/state/providers/authentication_provider.dart';
 
+import '../../state/providers/session_provider.dart';
 import '../../state/providers/user_provider.dart.dart';
 
+/// ### Sign up page
+///
+///  Users can sign up with their email and password via this page
+///
+///
 class SignUpPage extends ConsumerWidget {
   const SignUpPage({super.key});
   static String get routeName => 'signup';
@@ -15,14 +22,19 @@ class SignUpPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Global key of the form
     final formKey = GlobalKey<FormState>();
+
+    // Controllers attached to form fields
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
 
+    // RiverPod
     final auth = ref.watch(authenticationProvider);
-
     final userNotifier = ref.watch(userProvider.notifier);
+    final sessionNotifier = ref.watch(sessionControllerProvider.notifier);
 
+    // Shows error dialog when Firebase app returns an error
     void showErrorDialog(String error) {
       showDialog(
           context: context,
@@ -39,15 +51,22 @@ class SignUpPage extends ConsumerWidget {
               ));
     }
 
+    // Calls auth provider method to sign up with email and password
+    // then it calls user notifier to create new user in the database with default random name
+    // after this it initiates new session
     Future<void> signUp() async {
+      // Validates the form
       if (!formKey.currentState!.validate()) {
         return;
       }
 
       try {
-        await auth.createUserWithEmailAndPassword(
-            emailController.text, passwordController.text);
-        await userNotifier.createUser(emailController.text, "Silky Snow");
+        await auth
+            .createUserWithEmailAndPassword(
+                emailController.text, passwordController.text)
+            .then((value) async => await userNotifier
+                .createUser(emailController.text, RandomNames().getRandomName())
+                .then((value) => sessionNotifier.startSession()));
       } on FirebaseAuthException catch (e) {
         showErrorDialog(e.message.toString());
       }

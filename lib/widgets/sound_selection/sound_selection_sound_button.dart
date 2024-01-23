@@ -3,7 +3,6 @@ import 'package:metronome_app/resources/values/app_fonts.dart';
 
 import '../../resources/values/app_colors.dart';
 
-// I have to make this differently
 class SoundSelectionSoundButton extends StatelessWidget {
   final String name;
   final bool selected;

@@ -8,10 +8,15 @@ import 'package:metronome_app/pages/auth/sign_up_page.dart';
 import 'package:metronome_app/pages/favorites/favorites_page.dart';
 import 'package:metronome_app/pages/main_page.dart';
 import 'package:metronome_app/pages/settings/settings_page.dart';
-import 'package:metronome_app/pages/settings/settings_username_page.dart';
+import 'package:metronome_app/pages/settings/settings_name_page.dart';
 
 import '../state/providers/authentication_provider.dart';
 
+/// ### AppRouter
+///
+/// Manages app routes and user navigation
+///
+///
 final _key = GlobalKey<NavigatorState>();
 
 final appRouterProvider = Provider<GoRouter>((ref) {
@@ -70,10 +75,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         },
       ),
       GoRoute(
-        path: SettingsUsernamePage.routeLocation,
-        name: SettingsUsernamePage.routeName,
+        path: SettingsNamePage.routeLocation,
+        name: SettingsNamePage.routeName,
         builder: (context, state) {
-          return const SettingsUsernamePage();
+          return const SettingsNamePage();
         },
       ),
     ],

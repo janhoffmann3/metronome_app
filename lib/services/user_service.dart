@@ -8,13 +8,18 @@ import 'package:metronome_app/models/user.dart';
 
 import '../models/favorite.dart';
 
+/// ### UserService class
+///
+/// Performs database operations and return Futures
+///
+///
 class UserService {
+  // Gets recent Firebase token
   Future<String> getFirebaseToken() async {
     try {
       String? token =
           await firebase.FirebaseAuth.instance.currentUser?.getIdToken();
       if (token != null) {
-        print(token);
         return token;
       } else {
         throw Exception("Token is null");
@@ -24,14 +29,16 @@ class UserService {
     }
   }
 
+  // Gets headers
   Future<Map<String, String>> getHeaders() async {
     String token = await getFirebaseToken();
     return {
       'Content-Type': 'application/json',
-      'Authorization': '$token',
+      'Authorization': 'Bearer $token',
     };
   }
 
+  // Creates new user in the database
   Future<User> createUser(String email, String name) async {
     var url = Uri.parse("http://localhost:8081/users");
 
@@ -52,15 +59,14 @@ class UserService {
 
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonUser = jsonDecode(response.body);
-
       var user = User.fromJson(jsonUser);
-
       return user;
     } else {
       throw Exception("Failed to load user");
     }
   }
 
+  // Gets user by their email
   Future<User> getUserByEmail(String email) async {
     var url = Uri.parse("http://localhost:8081/users/getByEmail/$email");
 
@@ -77,6 +83,7 @@ class UserService {
     }
   }
 
+  // Updates user's name
   Future<User> updateName(int id, String name) async {
     var url = Uri.parse("http://localhost:8081/users/$id/name?name=$name");
 
@@ -93,6 +100,7 @@ class UserService {
     }
   }
 
+  // Updates user's settings
   Future<User> updateSettings(int id, Settings settings) async {
     var url = Uri.parse("http://localhost:8081/users/$id/settings");
 
@@ -106,13 +114,13 @@ class UserService {
       Map<String, dynamic> jsonUser = jsonDecode(response.body);
 
       var user = User.fromJson(jsonUser);
-
       return user;
     } else {
       throw Exception("Failed to load user");
     }
   }
 
+  // Add new favorite to a specific user
   Future<User> addFavorite(int id, Favorite favorite) async {
     var url = Uri.parse("http://localhost:8081/users/$id/favorites");
 
@@ -133,6 +141,7 @@ class UserService {
     }
   }
 
+  // Removes favorite
   Future<String> removeFavorite(int id, int favoriteId) async {
     var url =
         Uri.parse("http://localhost:8081/users/$id/favorites/$favoriteId");
@@ -146,6 +155,7 @@ class UserService {
     }
   }
 
+  // Add new session to a specific user
   Future<User> addSession(int id, Session session) async {
     var url = Uri.parse("http://localhost:8081/users/$id/sessions");
 

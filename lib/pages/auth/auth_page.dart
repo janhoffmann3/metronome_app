@@ -7,6 +7,13 @@ import 'package:metronome_app/resources/values/app_colors.dart';
 import 'package:metronome_app/resources/values/app_fonts.dart';
 import 'package:metronome_app/state/providers/authentication_provider.dart';
 
+import '../../state/providers/session_provider.dart';
+
+/// ### Authentication page
+///
+///  Landing page for unauthenticated user.
+///
+///
 class AuthPage extends ConsumerWidget {
   const AuthPage({super.key});
   static String get routeName => 'auth';
@@ -14,8 +21,11 @@ class AuthPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // RiverPod
     final auth = ref.watch(authenticationProvider);
+    final sessionNotifier = ref.watch(sessionControllerProvider.notifier);
 
+    // Shows error dialog when Firebase app returns an error
     void showErrorDialog(String error) {
       showDialog(
           context: context,
@@ -32,9 +42,12 @@ class AuthPage extends ConsumerWidget {
               ));
     }
 
+    // Calls auth provider method to sign in with Google
     Future<void> signInWithGoogle() async {
       try {
-        await auth.signInWithGoogle();
+        await auth
+            .signInWithGoogle()
+            .then((value) => sessionNotifier.startSession());
       } on FirebaseAuthException catch (e) {
         showErrorDialog(e.message.toString());
       }
@@ -43,12 +56,6 @@ class AuthPage extends ConsumerWidget {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-            /* gradient: RadialGradient(
-        center: Alignment.bottomLeft,
-        colors: [Color(0xFE291E4D), Color(0xFE10151D)],
-        stops: [0, 1],
-        radius: 1,
-      ) */
             image: DecorationImage(
                 image: AssetImage("assets/images/auth_page_background.jpg"),
                 fit: BoxFit.cover)),

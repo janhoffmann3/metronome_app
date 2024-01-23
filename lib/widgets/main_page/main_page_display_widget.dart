@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:metronome_app/resources/helpers/app_tempo_transcription.dart';
 
 import '../../entities/metronome.dart';
 import '../../resources/values/app_colors.dart';
@@ -12,7 +13,7 @@ import '../../state/metronome_controller.dart';
 /// It displays current tempo to user and contains information about latin tempo, bpm label and plus/minus buttons.
 /// With plus/minus buttons user can adjust the tempo by 1/-1.
 ///
-
+///
 class MainPageDisplayWidget extends ConsumerWidget {
   const MainPageDisplayWidget({super.key});
 
@@ -21,30 +22,8 @@ class MainPageDisplayWidget extends ConsumerWidget {
     final Metronome metronome = ref.watch(metronomeControllerProvider);
     int tempo = metronome.tempo;
 
-    String getItalianTranscription(int tempo) {
-      switch (tempo) {
-        case < 40:
-          return "Adagissimo";
-        case < 68:
-          return "Adagio";
-        case < 108:
-          return "Andante";
-        case < 120:
-          return "Moderato";
-        case < 156:
-          return "Allegro";
-        case < 176:
-          return "Vivace";
-        case <= 200:
-          return "Presto";
-        case > 200:
-          return "Prestissimo";
-        default:
-          return "What is that??";
-      }
-    }
-
-    final String italianTranscription = getItalianTranscription(tempo);
+    final String italianTranscription =
+        TempoTranscription().getTranscription(tempo);
 
     return Center(
       child: SizedBox(

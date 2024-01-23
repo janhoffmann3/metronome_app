@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:metronome_app/models/session.dart';
 import 'package:metronome_app/models/settings.dart';
+import 'package:metronome_app/state/metronome_controller.dart';
 import 'package:metronome_app/state/providers/session_provider.dart';
 import 'package:metronome_app/state/providers/user_provider.dart.dart';
 
@@ -11,6 +12,12 @@ import '../../resources/values/app_colors.dart';
 import '../../resources/values/app_fonts.dart';
 import '../../state/providers/authentication_provider.dart';
 
+/// ### Settings page
+///
+/// User can adjust settings on this page
+/// User can log out on this page
+///
+///
 class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});
   static String get routeName => 'settings';
@@ -18,10 +25,21 @@ class SettingsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // RiverPod
     final auth = ref.watch(authenticationProvider);
-
     final user = ref.watch(userProvider);
     final userNotifier = ref.watch(userProvider.notifier);
+    final sessionNotifier = ref.watch(sessionControllerProvider.notifier);
+    final session = ref.read(sessionControllerProvider);
+    final metronomeNotifier = ref.watch(metronomeControllerProvider.notifier);
+
+    // Signs out current user and ends session
+    Future<void> signOut() async {
+      sessionNotifier.endSession();
+      await userNotifier.addSession(Session(
+          id: null, startTime: session?.startTime, endTime: session?.endTime));
+      auth.signOut();
+    }
 
     return Scaffold(
       body: Container(
@@ -176,6 +194,7 @@ class SettingsPage extends ConsumerWidget {
                     onChanged: (value) {
                       userNotifier.updateSettings(
                           Settings(id: null, hapticFeedback: value));
+                      metronomeNotifier.setHaptic(value);
                     },
                     value: user!.settings!.hapticFeedback,
                     activeColor: AppColors.primary400,
@@ -204,17 +223,8 @@ class SettingsPage extends ConsumerWidget {
                       FontAwesomeIcons.chevronRight,
                       size: 15,
                     ),
-                    onPressed: () {
-                      ref
-                          .watch(sessionControllerProvider.notifier)
-                          .endSession();
-                      userNotifier.addSession(Session(
-                          id: null,
-                          startTime:
-                              ref.read(sessionControllerProvider)?.startTime,
-                          endTime:
-                              ref.read(sessionControllerProvider)?.endTime));
-                      auth.signOut();
+                    onPressed: () async {
+                      signOut();
                     },
                   ),
                 ),
