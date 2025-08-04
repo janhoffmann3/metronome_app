@@ -1,3 +1,3 @@
 # metronome_app
 
-Metronome app
+Metronome app for precise beat keeping.
